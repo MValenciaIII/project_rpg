@@ -1,11 +1,38 @@
 body {
     background-color: black;
 }
-.sprite {
+
+@font-face {
+    font-family: 'Dark Tone';
+    src: url('DarkTone-Regular.woff2') format('woff2'),
+        url('DarkTone-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+.title h1 { 
+    font-family: 'Dark Tone';
+    font-size: 100px;
+    text-align: center;
+}
+
+.menuButtons {
+    font-family: 'Dark Tone';
+    font-size: 40px;
+    text-align: center;
+}
+
+.menuButtons input {
+    margin: 15px 0px;
+}
+
+.skull_menu {
     width: 300px;
     height: 300px;
     background: url(../idle.png);
-    animation: play 1s steps(18) infinite;
+    animation: play .8s steps(18) infinite;
 }
 
 @keyframes play {
