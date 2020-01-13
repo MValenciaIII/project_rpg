@@ -2,7 +2,6 @@
 function menu() {
     var startGame = document.getElementById('startGame');
     var hideInstructions = document.getElementsByClassName('instructions')[0].style.display = 'none';
-
     var instructions = document.getElementById('instructions');
     startGame.addEventListener('click', village);
     
@@ -14,12 +13,13 @@ function menu() {
         
         return hideMenu + background;
     }
+
     instructions.addEventListener('click', instructionMenu);
     
     function instructionMenu() {
         let hideButtons = document.getElementsByClassName('menuButtons')[0].style.display = 'none';
         let showInstructions = document.getElementsByClassName('instructions')[0].style.display = 'block';
-
+        
         return showInstructions + hideButtons;
     }
 }
