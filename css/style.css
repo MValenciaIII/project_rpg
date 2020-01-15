@@ -18,6 +18,22 @@ body {
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Donjonikons';
+    src: url('Donjonikons.woff2') format('woff2'),
+        url('Donjonikons.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Eight Bit Dragon';
+    src: url('Eight-Bit-Dragon.woff2') format('woff2'),
+        url('Eight-Bit-Dragon.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 
 
 /* Menu */
@@ -70,9 +86,19 @@ body {
 }
 
 .box {
+    font-family: ;
     border: solid tan 2px;
     background-color: gray;
     margin: 10px 0px;
     height: 100px;
+    overflow-y: auto;
+}
+
+@media (max-width: 767px) {
+    .characterText img {
+        height: 20%;
+        width: 20%;
+        margin: 0px;
+    }
 }
 /* Village Scene End */
