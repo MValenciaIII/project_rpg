@@ -86,7 +86,6 @@ body {
 }
 
 .box {
-    font-family: ;
     border: solid tan 2px;
     background-color: gray;
     margin: 10px 0px;
@@ -94,11 +93,14 @@ body {
     overflow-y: auto;
 }
 
+.box p {
+    font-family: 'Eight Bit Dragon';
+}
+
 @media (max-width: 767px) {
     .characterText img {
-        height: 20%;
-        width: 20%;
-        margin: 0px;
+        height: 50%;
+        width: 50%;
     }
 }
 /* Village Scene End */
