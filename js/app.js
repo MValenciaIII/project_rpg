@@ -74,11 +74,21 @@ function village () {
     let optionOne = document.getElementById('buttonOne');
     let optionTwo = document.getElementById('buttonTwo');
     // optionTwo.addEventListener('click', first)
-    optionOne.addEventListener('click', battleScene)
-
+    optionOne.addEventListener('click', first)
+    function first() {
+        if (optionOne) {
+            characters('Hello World', 'gray')
+    
+        } else if (optionTwo) {
+            characters('Hello WOrld', 'blue')
+    
+        }
+        
+    }
+    
 
 }
 
-function battleScene() {
+function battlePhase () {
     var hideSceneOne = document.getElementsByClassName('village')[0].style.display = 'none';
 }
