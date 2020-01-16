@@ -5,6 +5,8 @@ function menu() {
     var startGame = document.getElementById('startGame');
     var hideInstructions = document.getElementsByClassName('instructions')[0].style.display = 'none';
     var hideSceneOne = document.getElementsByClassName('village')[0].style.display = 'none';
+    var hideFightOne = document.getElementsByClassName('fightSceneOne')[0].style.display = 'none';
+
     let background = document.querySelector('body');
     startGame.addEventListener('click', clearMenu);
     
@@ -37,6 +39,7 @@ function menu() {
 
         return hideInstructions + hideButtons;
     }
+    
 
 }
 menu();
@@ -74,21 +77,30 @@ function village () {
     let optionOne = document.getElementById('buttonOne');
     let optionTwo = document.getElementById('buttonTwo');
     // optionTwo.addEventListener('click', first)
-    optionOne.addEventListener('click', first)
-    function first() {
-        if (optionOne) {
-            characters('Hello World', 'gray')
+    // optionOne.addEventListener('click', first)
+    // function first() {
+    //     if (optionOne) {
+    //         characters('Hello World', 'gray')
     
-        } else if (optionTwo) {
-            characters('Hello WOrld', 'blue')
+    //     } else if (optionTwo) {
+    //         characters('Hello WOrld', 'blue')
     
-        }
+    //     }
         
-    }
+    // }
     
+    optionOne.addEventListener('click', battleScene)
+
 
 }
 
-function battlePhase () {
+function battleScene() {
+    var hideFightOne = document.getElementsByClassName('fightSceneOne')[0].style.display = 'initial';
     var hideSceneOne = document.getElementsByClassName('village')[0].style.display = 'none';
+   
+    let hero = 100;
+    let villian = 100;
+
+
+
 }

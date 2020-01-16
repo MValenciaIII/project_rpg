@@ -104,3 +104,19 @@ body {
     }
 }
 /* Village Scene End */
+
+/* Fight Scene One */
+@media (min-width:768px) {
+    .fightScene img {
+        height: 525px;
+    }
+
+}
+
+@media (max-width: 767px) {
+    .fightScene img {
+        height: 300px;
+    }
+}
+
+/* End Fight Scene */
