@@ -106,6 +106,44 @@ body {
 /* Village Scene End */
 
 /* Fight Scene One */
+.battleHUD {
+    background-color: rgb(90, 54, 12);
+    border: solid gray 2px;
+    height: auto;
+}
+
+.enemyHealthBar {
+    background-color: rgb(90, 54, 12);
+    border: solid gray 2px;
+    height: auto;
+
+}
+
+.yourHealthBar { 
+    background-color: rgb(90, 54, 12);
+    border: solid gray 2px;
+    height: auto;
+
+}
+
+.optionBox {
+    font-family: 'Eight Bit Dragon';
+    font-size: 20px;
+}
+
+.optionBox input {
+    
+    background: none;
+    border:  none;
+    margin: 10px 0;
+    color: white;
+}
+
+.fightScene img {
+    height: 525px;
+    width: 100%;
+}
+
 @media (min-width:768px) {
     .fightScene img {
         height: 525px;
@@ -116,7 +154,11 @@ body {
 @media (max-width: 767px) {
     .fightScene img {
         height: 300px;
+        margin-left: 10px;
+        width: 400px;
     }
 }
+
+
 
 /* End Fight Scene */

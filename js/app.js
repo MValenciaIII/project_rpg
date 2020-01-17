@@ -53,16 +53,20 @@ function characters(text, characterChatColor ) {
     let characterChatBox = document.createElement('div');
     characterChatBox.className = ('row box');
     characterText.appendChild(characterChatBox);
+
     let picture = document.createElement('div');
     picture.className = ('col-xs-4 col-sm-2');
     characterChatBox.appendChild(picture);
+
     let image = document.createElement('img');
     image.className = ('img-responsive')
     //image.src = mediaPath;
     image.appendChild(picture);
+
     let dialogueBox = document.createElement('div');
     dialogueBox.className = ('col-sm-10 col-xs-8');
     characterChatBox.appendChild(dialogueBox);
+
     let dialogue = document.createElement('p');
     dialogue.innerHTML = text;
     dialogueBox.appendChild(dialogue);
@@ -76,6 +80,9 @@ function village () {
     var hideSceneOne = document.getElementsByClassName('village')[0].style.display = 'initial';
     let optionOne = document.getElementById('buttonOne');
     let optionTwo = document.getElementById('buttonTwo');
+    characters('Hello World', 'blue')
+    characters('Hello World', 'gray')
+
     // optionTwo.addEventListener('click', first)
     // optionOne.addEventListener('click', first)
     // function first() {
@@ -100,6 +107,17 @@ function battleScene() {
    
     let hero = 100;
     let villian = 100;
+
+    function health(num) {
+        let enemiesHealth = document.getElementsByClassName('enemyHealthBar')[0];
+        for (let i = 0; i <= num; i++) {
+            const element = num[i];
+            let healthbox = document.createElement('div');
+            healthbox.className = 'healthbox'
+            enemiesHealth.appendChild(healthbox);
+            
+        }
+    }
 
 
 
