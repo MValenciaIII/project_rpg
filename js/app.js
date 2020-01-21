@@ -45,11 +45,14 @@ function menu() {
 menu();
 //NaN !=  NaN
 //Use an object to hold all conversations. Then call it and make a function to change the color of the conversation depending on the person.
-var filler = new Image();
-filler.src = "media/frame-1.png"
+//store images in a rray
+var facePicture = [
+    {name: 'Skeleton' , image: 'media/frame-1.png'}
+]
 
-function characters(text, characterChatColor ) {
+function characters(text, characterChatColor, mediaPath ) {
     let characterText = document.getElementsByClassName('characterText')[0];
+    console.log(characterText)
     let characterChatBox = document.createElement('div');
     characterChatBox.className = ('row box');
     characterText.appendChild(characterChatBox);
@@ -60,8 +63,8 @@ function characters(text, characterChatColor ) {
 
     let image = document.createElement('img');
     image.className = ('img-responsive')
-    //image.src = mediaPath;
-    image.appendChild(picture);
+    image.src = mediaPath;
+    picture.appendChild(image);
 
     let dialogueBox = document.createElement('div');
     dialogueBox.className = ('col-sm-10 col-xs-8');
@@ -80,8 +83,8 @@ function village () {
     var hideSceneOne = document.getElementsByClassName('village')[0].style.display = 'initial';
     let optionOne = document.getElementById('buttonOne');
     let optionTwo = document.getElementById('buttonTwo');
-    characters('Hello World', 'blue')
-    characters('Hello World', 'gray')
+    characters('Hello World', 'blue', facePicture[0].image)
+    characters('Hello World', 'gray', 'media/frame-1.png')
 
     // optionTwo.addEventListener('click', first)
     // optionOne.addEventListener('click', first)
@@ -101,24 +104,64 @@ function village () {
 
 }
 
-function battleScene() {
+function battleScene(health, name, teamHealth, teamName) {
     var hideFightOne = document.getElementsByClassName('fightSceneOne')[0].style.display = 'initial';
     var hideSceneOne = document.getElementsByClassName('village')[0].style.display = 'none';
+    let attackButton = document.getElementById('attack');
+    let healButton = document.getElementById('heal');
    
-    let hero = 100;
-    let villian = 100;
+    // let hero = 100;
+    // let villian = 100;
+    var enemies = []
+    var enemyDetails = {}
 
-    function health(num) {
+
         let enemiesHealth = document.getElementsByClassName('enemyHealthBar')[0];
-        for (let i = 0; i <= num; i++) {
-            const element = num[i];
+        for (let i = 0; i <= health; i++) {
+            const element = health[i];
+            let row = document.createElement('div')
+            row.className = 'row enemyText'
+            enemiesHealth.appendChild(row)
             let healthbox = document.createElement('div');
-            healthbox.className = 'healthbox'
-            enemiesHealth.appendChild(healthbox);
+            healthbox.className = 'healthbox col-sm-5 col-xs-3'
+            healthbox.setAttribute('data-enemy', [i]);
+            healthbox.setAttribute('value', 100);
+            row.appendChild(healthbox);
+            healthbox = health;
+            let enemyName = document.createElement('p');
+            enemyName.className = 'col-sm-6 col-xs-3 enemyTextName'
+            row.appendChild(enemyName);
+            enemyName.innerHTML = name;
+
+            let numberHealth = document.getElementsByClassName('healthbox')[0].getAttribute('value');
+            enemyDetails.name = name;
+            enemyDetails.health = numberHealth;
+            enemies.push(enemyDetails);
+            // enemies.push = element;
+            // console.log(numberHealth)
+            console.log(enemies);
+
+        }
+
+        let herosHealth = document.getElementsByClassName('yourHealthBar')[0];
+        for (let i = 0; i <= teamHealth; i++) {
+            const element = teamHealth[i];
+            let row = document.createElement('div')
+            row.className = 'row enemyText'
+            herosHealth.appendChild(row)
+            let healthbox = document.createElement('div');
+            healthbox.className = 'teamHealthBox col-sm-5 col-xs-3'
+            healthbox.setAttribute('data-hero', [i]);
+            healthbox. setAttribute('value', 100);
+            row.appendChild(healthbox);
+            healthbox = health;
+            let enemyName = document.createElement('p');
+            enemyName.className = 'col-sm-6 col-xs-3 teamTextName'
+            row.appendChild(enemyName);
+            enemyName.innerHTML = teamName;
+
             
         }
-    }
-
-
 
 }
+battleScene(3, 'skeleton', 2, 'Heroes')
