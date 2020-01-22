@@ -110,14 +110,12 @@ function battleScene(health, name, teamHealth, teamName) {
     let attackButton = document.getElementById('attack');
     let healButton = document.getElementById('heal');
    
-    // let hero = 100;
-    // let villian = 100;
     var enemies = []
     var enemyDetails = {}
 
 
         let enemiesHealth = document.getElementsByClassName('enemyHealthBar')[0];
-        for (let i = 0; i <= health; i++) {
+        for (let i = 0; i < health; i++) {
             const element = health[i];
             let row = document.createElement('div')
             row.className = 'row enemyText'
@@ -139,12 +137,13 @@ function battleScene(health, name, teamHealth, teamName) {
             enemies.push(enemyDetails);
             // enemies.push = element;
             // console.log(numberHealth)
-            console.log(enemies);
 
         }
+        var heroes = []
+        var heroDetails = {}
 
         let herosHealth = document.getElementsByClassName('yourHealthBar')[0];
-        for (let i = 0; i <= teamHealth; i++) {
+        for (let i = 0; i < teamHealth; i++) {
             const element = teamHealth[i];
             let row = document.createElement('div')
             row.className = 'row enemyText'
@@ -160,8 +159,18 @@ function battleScene(health, name, teamHealth, teamName) {
             row.appendChild(enemyName);
             enemyName.innerHTML = teamName;
 
+            let numberHealth = document.getElementsByClassName('teamHealthBox')[0].getAttribute('value');
+            heroDetails.name = teamName;
+            heroDetails.health = numberHealth;
+            heroes.push(heroDetails);
+
             
         }
 
+        // attackButton.addEventListener('click', attackLogic)
+
+        function initiateBattle () {
+            
+        }
 }
-battleScene(3, 'skeleton', 2, 'Heroes')
+battleScene(1, 'skeleton', 1, 'Heroes')
