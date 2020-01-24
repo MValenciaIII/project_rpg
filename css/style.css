@@ -81,8 +81,8 @@ body {
     overflow-y: auto;
 }
 
-.textBox { 
-    
+.typing { 
+    animation: typingEffect 5s steps();
 }
 
 .box {
@@ -101,6 +101,20 @@ body {
     .characterText img {
         height: 50%;
         width: 50%;
+    }
+}
+
+.fadein  {
+    animation: fadingout 2s linear ;
+    animation-iteration-count: 1;
+}
+
+@keyframes fadingout  {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
     }
 }
 /* Village Scene End */

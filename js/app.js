@@ -26,7 +26,7 @@ function menu() {
     function instructionMenu() {
         let hideButtons = document.getElementsByClassName('menuButtons')[0].style.display = 'none';
         let showInstructions = document.getElementsByClassName('instructions')[0].style.display = 'block';
-
+        
         return showInstructions + hideButtons;
     }
 
@@ -50,7 +50,7 @@ var facePicture = [
     {name: 'Skeleton' , image: 'media/frame-1.png'}
 ]
 
-function characters(text, characterChatColor, mediaPath ) {
+function characters(text, characterChatColor, name, mediaPath, buttonOne = '' , buttonTwo = '' ) {
     let characterText = document.getElementsByClassName('characterText')[0];
     console.log(characterText)
     let characterChatBox = document.createElement('div');
@@ -69,6 +69,7 @@ function characters(text, characterChatColor, mediaPath ) {
     let dialogueBox = document.createElement('div');
     dialogueBox.className = ('col-sm-10 col-xs-8');
     characterChatBox.appendChild(dialogueBox);
+//add a name
 
     let dialogue = document.createElement('p');
     dialogue.innerHTML = text;
@@ -76,32 +77,30 @@ function characters(text, characterChatColor, mediaPath ) {
 
     let color = characterChatBox
     color.style.backgroundColor = characterChatColor;
+
+    let optionOne = document.createElement('button');
+    optionOne.innerHTML = buttonOne;
+    dialogueBox.appendChild(optionOne);
+
+
+    let optionTwo = document.createElement('button');
+    optionTwo.innerHTML = buttonTwo;
+    dialogueBox.appendChild(optionTwo);
+
 }
 
 
 function village () {
     var hideSceneOne = document.getElementsByClassName('village')[0].style.display = 'initial';
-    let optionOne = document.getElementById('buttonOne');
-    let optionTwo = document.getElementById('buttonTwo');
-    characters('Hello World', 'blue', facePicture[0].image)
-    characters('Hello World', 'gray', 'media/frame-1.png')
-    characters('Hello World', 'yellow', 'media/frame-1.png')
+    // characters('hello', 'gray', 'media/frame-1.png')
+    
 
 
-    // optionTwo.addEventListener('click', first)
-    // optionOne.addEventListener('click', first)
-    // function first() {
-    //     if (optionOne) {
-    //         characters('Hello World', 'gray')
-    
-    //     } else if (optionTwo) {
-    //         characters('Hello WOrld', 'blue')
-    
-    //     }
-        
-    // }
-    
-    optionOne.addEventListener('click', battleScene)
+    // let optionOne = document.getElementById('buttonOne');
+    // let optionTwo = document.getElementById('buttonTwo');
+    characters('j', 'blue', 'narrator',facePicture[0].image, 'yo', 'oof')
+    // characters('hello', 'gray', 'media/frame-1.png')
+    //optionOne.addEventListener('click', battleScene)
 
 
 }
@@ -223,6 +222,4 @@ function battleScene(health, name, enemydamage, teamHealth, teamName) {
     }//Function initateBattle
 
 }//Function Battlescene End
-battleScene(2, 'skeleton', 5, 1, 'Heroes')
-
-
+//battleScene(2, 'skeleton', 5, 1, 'Heroes')
