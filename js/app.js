@@ -167,6 +167,7 @@ function battleScene(health, name, enemydamage, teamHealth, teamName) {
             heroDetails.health = numberHealth;
             heroDetails.attack = 10
             heroes.push(heroDetails);
+            console.log(enemies)
             
             
             
@@ -223,3 +224,5 @@ function battleScene(health, name, enemydamage, teamHealth, teamName) {
 
 }//Function Battlescene End
 battleScene(2, 'skeleton', 5, 1, 'Heroes')
+
+
