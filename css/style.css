@@ -37,6 +37,7 @@ body {
 
 
 /* Menu */
+
 .menu {
 
 }
@@ -57,6 +58,10 @@ body {
     margin: 15px 0px;
 }
 
+.campfire img {
+    margin-left: -35px;
+}
+
 /* Menu End */
 
 .skull_menu {
@@ -70,6 +75,38 @@ body {
 
 @keyframes play {
     100% { background-position: 541px 0};
+}
+
+.skeleton {
+    width: 72px;
+    height: 100px;
+    margin-top: 60px;
+    margin-right: 22px;
+    background-image: url(../media/Skeleton\ Idle2.png);
+    animation: skeletonPlay .7s steps(11) infinite;
+}
+
+@keyframes skeletonPlay {
+    100% { background-position: 825px 0};
+}
+
+@media (max-width: 768px) {
+    .skeleton {
+        margin: 0;
+        display: none;
+    }
+    .campfire img {
+        display: none;
+    }
+
+    .menu {
+        background-image: url(../media/8-bitFire.gif);
+        background-repeat: no-repeat;
+        background-position: bottom ;
+        background-size: cover;
+        
+    }
+
 }
 
 /* Village */

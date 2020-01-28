@@ -120,14 +120,21 @@ function village () {
     var hideSceneOne = document.getElementsByClassName('village')[0].style.display = 'initial';
     characters('You start to notice you are about to wake up... Do you choose to wake up or sleep more?', 
     'gray',  'narrator', 'media/transparent.png', 'Wake up', 'Sleep more')
-    let wakeUp = document.getElementById('optionOne').addEventListener('click', (event) => {
-        characters('I think I will stay in bed for a bit more..' , '#442715', 'Hero', 'media/transparent.png')
+    let wakeUp = document.getElementById('optionOne');
+    wakeUp.addEventListener('click', (event) => {
+        characters('I believe I should be getting up.' , '#442715', 'Hero', 'media/transparent.png')
+        wakeUp.disabled = true;
+        sleepMore.disabled = true
+
         setTimeout(() => {
-            characters('')
-        }, 2000);
+            characters('You began to hear very heavy and rapid knocking and look over.' ,'gray' , 'narrator', 'media/transparent.png')
+        }, 3000);
     });
-    let sleepMore = document.getElementById('optionTwo').addEventListener('click', (event) => {
-        characters('')
+    let sleepMore = document.getElementById('optionTwo');
+    sleepMore.addEventListener('click', (event) => {
+        characters('I think I will stay in bed for a bit more..', '#442715', 'Hero' , 'media/transparent.png')
+        sleepMore.disabled = true
+        wakeUp.disabled = true;
     });
 
 
@@ -140,19 +147,21 @@ function village () {
 
 }
 
-function battleScene(health, name, enemydamage, teamHealth, teamName) {
-    var hideFightOne = document.getElementsByClassName('fightSceneOne')[0].style.display = 'initial';
+function battleScene(enemyNumber, name, enemydamage, teamNumber, teamName, classScenario) {
+    var scenario = document.getElementsByClassName(classScenario)[0].style.display = 'initial';
+    // var hideScenario = document.getElementsByClassName(hideclassScenario)[0].style.display = 'none';
     var hideSceneOne = document.getElementsByClassName('village')[0].style.display = 'none';
+
     let attackButton = document.getElementById('attack');
-    let healButton = document.getElementById('heal');
+    // let healButton = document.getElementById('heal');
    
     var enemies = []
     var enemyDetails = {};
 
 
         var enemiesHealth = document.getElementsByClassName('enemyHealthBar')[0];
-        for (let i = 0; i < health; i++) {
-            const element = health[i];
+        for (let i = 0; i < enemyNumber; i++) {
+            const element = enemyNumber[i];
             let row = document.createElement('div')
             row.className = 'row enemyText'
             enemiesHealth.appendChild(row)
@@ -161,7 +170,7 @@ function battleScene(health, name, enemydamage, teamHealth, teamName) {
             healthbox.setAttribute('data-enemy', [i]);
             healthbox.setAttribute('value', 50);
             row.appendChild(healthbox);
-            healthbox = health;
+            healthbox = enemyNumber;
             let enemyName = document.createElement('p');
             enemyName.className = 'col-sm-6 col-xs-3 enemyTextName'
             row.appendChild(enemyName);
@@ -181,8 +190,8 @@ function battleScene(health, name, enemydamage, teamHealth, teamName) {
         var heroDetails = {}
 
         let herosHealth = document.getElementsByClassName('yourHealthBar')[0];
-        for (let i = 0; i < teamHealth; i++) {
-            const element = teamHealth[i];
+        for (let i = 0; i < teamNumber; i++) {
+            const element = teamNumber[i];
             let row = document.createElement('div')
             row.className = 'row heroText'
             herosHealth.appendChild(row)
@@ -191,7 +200,7 @@ function battleScene(health, name, enemydamage, teamHealth, teamName) {
             healthbox.setAttribute('data-hero', [i]);
             healthbox.setAttribute('value', 100);
             row.appendChild(healthbox);
-            healthbox = health;
+            healthbox = enemyNumber;
             let enemyName = document.createElement('p');
             enemyName.className = 'col-sm-6 col-xs-3 teamTextName'
             row.appendChild(enemyName);
@@ -213,49 +222,99 @@ function battleScene(health, name, enemydamage, teamHealth, teamName) {
         //while attack is true... 
         //do stuff
     function initiateBattle () {
-        console.log(enemies[0].health * .75)
-        console.log(enemies[0].health)
+        
+        
         let no = true;
-        for (let i = 0; i < health; i++) {  
-            let enemynodeList = document.querySelectorAll('.enemyText');
-            let enemyArrayList = Array.from(enemynodeList)
+        let enemynodeList = document.querySelectorAll('.enemyText');
+        let enemyArrayList = Array.from(enemynodeList)
+        for (let i = 0; i < enemyArrayList.length ; i++) { 
+            
             enemyArrayList[i].addEventListener('click', function attackingEnemy() {
                 if (no) {
                     switch (enemyArrayList[i]) {
                         case enemyArrayList[0]:
+                            
                             enemies[0].health -= heroes[0].attack;
+                            
                             //console.log(enemies[0].health)
-                            no = false;
-                            if (parseInt(enemies[0].health) < parseInt(enemies[0].maxHealth * .75)) {
-                                console.log('yo')
+                            if (parseInt(enemies[0].health) < parseInt(enemies[0].maxHealth * .25)) {
+                                enemyArrayList[0].querySelector('.healthbox').style.backgroundColor = 'red';
                             }
+                            else if (parseInt(enemies[0].health) < parseInt(enemies[0].maxHealth * .50)) {
+                                enemyArrayList[0].querySelector('.healthbox').style.backgroundColor = 'orange';
+                            }
+                            else if (parseInt(enemies[0].health) < parseInt(enemies[0].maxHealth * .75)) {
+                                enemyArrayList[0].querySelector('.healthbox').style.backgroundColor = 'yellow';
+                            }
+                            no = false;
+                            
                             break;
                         case enemyArrayList[1]:
-                            console.log('yo')
+                            
                             enemies[1].health -= heroes[0].attack;
+                            
+                            if (parseInt(enemies[1].health) < parseInt(enemies[1].maxHealth * .25)) {
+                                enemyArrayList[1].querySelector('.healthbox').style.backgroundColor = 'red';
+                            }
+                            else if (parseInt(enemies[1].health) < parseInt(enemies[1].maxHealth * .50)) {
+                                enemyArrayList[1].querySelector('.healthbox').style.backgroundColor = 'orange';
+                            }
+                            else if (parseInt(enemies[1].health) < parseInt(enemies[1].maxHealth * .75)) {
+                                enemyArrayList[1].querySelector('.healthbox').style.backgroundColor = 'yellow';
+                            }
                             no = false;
                             break;
                         case enemyArrayList[2]:
                             console.log('3')
                             enemies[2].health -= heroes[0].attack;
+                            if (parseInt(enemies[2].health) < parseInt(enemies[2].maxHealth * .25)) {
+                                enemyArrayList[2].querySelector('.healthbox').style.backgroundColor = 'red';
+                            }
+                            else if (parseInt(enemies[2].health) < parseInt(enemies[2].maxHealth * .50)) {
+                                enemyArrayList[2].querySelector('.healthbox').style.backgroundColor = 'orange';
+                            }
+                            else if (parseInt(enemies[2].health) < parseInt(enemies[2].maxHealth * .75)) {
+                                enemyArrayList[2].querySelector('.healthbox').style.backgroundColor = 'yellow';
+                            }
                             no = false;
                             break;
                         case enemyArrayList[3]:
                             console.log('4')
                             enemies[3].health -= heroes[0].attack;
+                            if (parseInt(enemies[3].health) < parseInt(enemies[3].maxHealth * .25)) {
+                                enemyArrayList[3].querySelector('.healthbox').style.backgroundColor = 'red';
+                            }
+                            else if (parseInt(enemies[3].health) < parseInt(enemies[3].maxHealth * .50)) {
+                                enemyArrayList[3].querySelector('.healthbox').style.backgroundColor = 'orange';
+                            }
+                            else if (parseInt(enemies[3].health) < parseInt(enemies[3].maxHealth * .75)) {
+                                enemyArrayList[3].querySelector('.healthbox').style.backgroundColor = 'yellow';
+                            }
                             no = false;
                             break;
                         default:
                                 no = false;
                             break;
                     }//switch End
-                    for (let j = 0; j < health; j++) {
-                        const element = health[j];
+                    for (let j = 0; j < enemyNumber; j++) {
+                        const element = enemyNumber[j];
                         if (!no) {
+                            // function getRandonInt(max) {
+                            //     return Math.floor(Math.random() * Math.floor(max));
+                            // }
+                            // switch (getRandonInt(20)) {
+                            //     case value:
+                                    
+                            //         break;
+                            
+                            //     default:
+                            //         break;
+                            // }
+ 
                             heroes[0].health -= enemies[j].attack
                             console.log(heroes[0].health);
                         }
-                        
+                        //make a switch and make a miss with .random
                     }
                 }//Conditional End
             });//eventlistender End
@@ -263,6 +322,6 @@ function battleScene(health, name, enemydamage, teamHealth, teamName) {
     }//Function initateBattle
 
 }//Function Battlescene End
-// battleScene(2, 'skeleton', 5, 1, 'Heroes')
-// battleScene(1, 'yo', 2, 1, 'Heroes')
+battleScene(2, 'skeleton', 5, 1, 'Heroes', 'fightSceneOne' )
+// battleScene(1, 'yo', 2, 1, 'Heroes', 'fightSceneTwo','fightSceneOne' )
 
