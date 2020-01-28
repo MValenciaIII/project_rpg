@@ -1,4 +1,6 @@
 
+
+
 function menu() {
     //Want to add transition to buttons and changes.
     //D20 dice?? 
@@ -47,15 +49,25 @@ menu();
 //Use an object to hold all conversations. Then call it and make a function to change the color of the conversation depending on the person.
 //store images in a rray
 var facePicture = [
-    {name: 'Skeleton' , image: 'media/frame-1.png'}
+    {name: 'Skeleton' , image: 'media/frame-1.png'},
+    {name: 'Narrator', image: 'media/transparent.png'}
+    
 ]
 
 function characters(text, characterChatColor, name, mediaPath, buttonOne = '' , buttonTwo = '' ) {
     let characterText = document.getElementsByClassName('characterText')[0];
-    console.log(characterText)
     let characterChatBox = document.createElement('div');
     characterChatBox.className = ('row box');
     characterText.appendChild(characterChatBox);
+
+    let characterNameRow = document.createElement('div');
+    characterNameRow.className = ('row ');
+    characterChatBox.appendChild(characterNameRow);
+
+    let characterName = document.createElement('p');
+    characterName.className = ('col-sm-push-2 col-sm-3 characterName')
+    characterName.innerHTML = name;
+    characterNameRow.appendChild(characterName)
 
     let picture = document.createElement('div');
     picture.className = ('col-xs-4 col-sm-2');
@@ -67,38 +79,61 @@ function characters(text, characterChatColor, name, mediaPath, buttonOne = '' , 
     picture.appendChild(image);
 
     let dialogueBox = document.createElement('div');
-    dialogueBox.className = ('col-sm-10 col-xs-8');
+    dialogueBox.className = ('col-sm-10 col-xs-8 dialogueBox');
     characterChatBox.appendChild(dialogueBox);
-//add a name
+
+    if (characterName.innerHTML == 'Hero') {
+        picture.className = ('col-xs-4 col-sm-4 skull_menu')
+        dialogueBox.className = ('col-sm-8 col-xs-8')
+    }
 
     let dialogue = document.createElement('p');
-    dialogue.innerHTML = text;
+    dialogue.innerHTML = text
     dialogueBox.appendChild(dialogue);
+    
+
 
     let color = characterChatBox
     color.style.backgroundColor = characterChatColor;
 
     let optionOne = document.createElement('button');
+    optionOne.className = ('decisionButtons');
     optionOne.innerHTML = buttonOne;
+    optionOne.id = 'optionOne';
     dialogueBox.appendChild(optionOne);
 
 
     let optionTwo = document.createElement('button');
+    optionTwo.className = ('decisionButtons');
+    optionTwo.id = 'optionTwo';
     optionTwo.innerHTML = buttonTwo;
     dialogueBox.appendChild(optionTwo);
+    if (optionOne.innerHTML == '' && optionTwo.innerHTML == '') {
+        optionOne.style.display = 'none'
+        optionTwo.style.display = 'none'
 
+    }
 }
 
 
 function village () {
     var hideSceneOne = document.getElementsByClassName('village')[0].style.display = 'initial';
-    // characters('hello', 'gray', 'media/frame-1.png')
-    
+    characters('You start to notice you are about to wake up... Do you choose to wake up or sleep more?', 
+    'gray',  'narrator', 'media/transparent.png', 'Wake up', 'Sleep more')
+    let wakeUp = document.getElementById('optionOne').addEventListener('click', (event) => {
+        characters('I think I will stay in bed for a bit more..' , '#442715', 'Hero', 'media/transparent.png')
+        setTimeout(() => {
+            characters('')
+        }, 2000);
+    });
+    let sleepMore = document.getElementById('optionTwo').addEventListener('click', (event) => {
+        characters('')
+    });
+
 
 
     // let optionOne = document.getElementById('buttonOne');
     // let optionTwo = document.getElementById('buttonTwo');
-    characters('j', 'blue', 'narrator',facePicture[0].image, 'yo', 'oof')
     // characters('hello', 'gray', 'media/frame-1.png')
     //optionOne.addEventListener('click', battleScene)
 
@@ -134,6 +169,7 @@ function battleScene(health, name, enemydamage, teamHealth, teamName) {
 
             let numberHealth = document.getElementsByClassName('healthbox')[0].getAttribute('value');
             enemyDetails.name = name;
+            enemyDetails.maxHealth = numberHealth;
             enemyDetails.health = numberHealth;
             enemyDetails.attack = enemydamage
             enemies.push(enemyDetails);
@@ -177,6 +213,8 @@ function battleScene(health, name, enemydamage, teamHealth, teamName) {
         //while attack is true... 
         //do stuff
     function initiateBattle () {
+        console.log(enemies[0].health * .75)
+        console.log(enemies[0].health)
         let no = true;
         for (let i = 0; i < health; i++) {  
             let enemynodeList = document.querySelectorAll('.enemyText');
@@ -186,8 +224,11 @@ function battleScene(health, name, enemydamage, teamHealth, teamName) {
                     switch (enemyArrayList[i]) {
                         case enemyArrayList[0]:
                             enemies[0].health -= heroes[0].attack;
-                            console.log(enemies[0].health)
+                            //console.log(enemies[0].health)
                             no = false;
+                            if (parseInt(enemies[0].health) < parseInt(enemies[0].maxHealth * .75)) {
+                                console.log('yo')
+                            }
                             break;
                         case enemyArrayList[1]:
                             console.log('yo')
@@ -222,4 +263,6 @@ function battleScene(health, name, enemydamage, teamHealth, teamName) {
     }//Function initateBattle
 
 }//Function Battlescene End
-//battleScene(2, 'skeleton', 5, 1, 'Heroes')
+// battleScene(2, 'skeleton', 5, 1, 'Heroes')
+// battleScene(1, 'yo', 2, 1, 'Heroes')
+

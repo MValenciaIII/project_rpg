@@ -37,6 +37,9 @@ body {
 
 
 /* Menu */
+.menu {
+
+}
 
 .title h1 { 
     font-family: 'Dark Tone';
@@ -56,16 +59,18 @@ body {
 
 /* Menu End */
 
-/* .skull_menu {
-    width: 300px;
-    height: 300px;
-    background: url(../idle.png);
-    animation: play .8s steps(18) infinite;
+.skull_menu {
+    width: 110px;
+    height: 100px;
+    margin-top: -15px;
+    margin-left: -15px;
+    background-image: url(../media/heroIdle.png);
+    animation: play .7s steps(4) infinite;
 }
 
 @keyframes play {
-    100% { background-position: 5400px 0};
-} */
+    100% { background-position: 541px 0};
+}
 
 /* Village */
 .village h1{
@@ -75,22 +80,46 @@ body {
     text-align: center;
 }
 
+/* Village Scene End */
+
+/* Character Chat Style */
+
 .characterText {
     border: gray solid 3px;
     height: auto;
     overflow-y: auto;
 }
 
-.typing { 
-    animation: typingEffect 5s steps();
+.characterName {
+    font-family: 'Eight Bit Dragon';
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.decisionButtons {
+    font-family: 'Eight Bit Dragon';
+    padding: 5px;
+    background-color: rgb(105, 105, 105);
+    border: darkgray groove 8px;
+    margin: 10px;
 }
 
 .box {
-    border: solid tan 2px;
+    border: groove rgb(141, 141, 141) 10px;
     background-color: gray;
     margin: 10px 0px;
-    height: 100px;
-    overflow-y: auto;
+    height: auto;
+    /* overflow-y: auto; */
+    animation: fade ease-in 2s 1;
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 .box p {
@@ -117,7 +146,9 @@ body {
         opacity: 0;
     }
 }
-/* Village Scene End */
+
+/* Character Chat Style END */
+
 
 /* Fight Scene One */
 .battleHUD {
@@ -237,3 +268,139 @@ body {
 }
 
 /* End Fight Scene */
+
+
+/* Shake  */
+
+/*! * * * * * * * * * * * * * * * * * * * *\  
+  CSShake :: shake-little
+  v1.5.0
+  CSS classes to move your DOM
+  (c) 2015 @elrumordelaluz
+  http://elrumordelaluz.github.io/csshake/
+  Licensed under MIT
+\* * * * * * * * * * * * * * * * * * * * */
+.shake-little {
+    display: inherit;
+    transform-origin: center center; }
+  
+  .shake-freeze,
+  .shake-constant.shake-constant--hover:hover,
+  .shake-trigger:hover .shake-constant.shake-constant--hover {
+    animation-play-state: paused; }
+  
+  .shake-freeze:hover,
+  .shake-trigger:hover .shake-freeze, .shake-little:hover,
+  .shake-trigger:hover .shake-little {
+    animation-play-state: running; }
+  
+  @keyframes shake-little {
+    2% {
+      transform: translate(0px, 1px) rotate(0.5deg); }
+    4% {
+      transform: translate(0px, 1px) rotate(0.5deg); }
+    6% {
+      transform: translate(1px, 1px) rotate(0.5deg); }
+    8% {
+      transform: translate(0px, 0px) rotate(0.5deg); }
+    10% {
+      transform: translate(1px, 0px) rotate(0.5deg); }
+    12% {
+      transform: translate(1px, 1px) rotate(0.5deg); }
+    14% {
+      transform: translate(0px, 0px) rotate(0.5deg); }
+    16% {
+      transform: translate(1px, 0px) rotate(0.5deg); }
+    18% {
+      transform: translate(0px, 1px) rotate(0.5deg); }
+    20% {
+      transform: translate(0px, 1px) rotate(0.5deg); }
+    22% {
+      transform: translate(1px, 1px) rotate(0.5deg); }
+    24% {
+      transform: translate(0px, 1px) rotate(0.5deg); }
+    26% {
+      transform: translate(0px, 0px) rotate(0.5deg); }
+    28% {
+      transform: translate(1px, 0px) rotate(0.5deg); }
+    30% {
+      transform: translate(1px, 0px) rotate(0.5deg); }
+    32% {
+      transform: translate(0px, 1px) rotate(0.5deg); }
+    34% {
+      transform: translate(0px, 1px) rotate(0.5deg); }
+    36% {
+      transform: translate(0px, 0px) rotate(0.5deg); }
+    38% {
+      transform: translate(1px, 1px) rotate(0.5deg); }
+    40% {
+      transform: translate(1px, 0px) rotate(0.5deg); }
+    42% {
+      transform: translate(0px, 1px) rotate(0.5deg); }
+    44% {
+      transform: translate(0px, 1px) rotate(0.5deg); }
+    46% {
+      transform: translate(0px, 0px) rotate(0.5deg); }
+    48% {
+      transform: translate(0px, 1px) rotate(0.5deg); }
+    50% {
+      transform: translate(0px, 1px) rotate(0.5deg); }
+    52% {
+      transform: translate(1px, 1px) rotate(0.5deg); }
+    54% {
+      transform: translate(0px, 0px) rotate(0.5deg); }
+    56% {
+      transform: translate(0px, 0px) rotate(0.5deg); }
+    58% {
+      transform: translate(0px, 0px) rotate(0.5deg); }
+    60% {
+      transform: translate(0px, 1px) rotate(0.5deg); }
+    62% {
+      transform: translate(0px, 0px) rotate(0.5deg); }
+    64% {
+      transform: translate(1px, 0px) rotate(0.5deg); }
+    66% {
+      transform: translate(0px, 1px) rotate(0.5deg); }
+    68% {
+      transform: translate(0px, 0px) rotate(0.5deg); }
+    70% {
+      transform: translate(1px, 1px) rotate(0.5deg); }
+    72% {
+      transform: translate(1px, 0px) rotate(0.5deg); }
+    74% {
+      transform: translate(0px, 1px) rotate(0.5deg); }
+    76% {
+      transform: translate(0px, 1px) rotate(0.5deg); }
+    78% {
+      transform: translate(1px, 0px) rotate(0.5deg); }
+    80% {
+      transform: translate(1px, 0px) rotate(0.5deg); }
+    82% {
+      transform: translate(0px, 0px) rotate(0.5deg); }
+    84% {
+      transform: translate(1px, 0px) rotate(0.5deg); }
+    86% {
+      transform: translate(0px, 0px) rotate(0.5deg); }
+    88% {
+      transform: translate(0px, 0px) rotate(0.5deg); }
+    90% {
+      transform: translate(1px, 1px) rotate(0.5deg); }
+    92% {
+      transform: translate(1px, 1px) rotate(0.5deg); }
+    94% {
+      transform: translate(1px, 0px) rotate(0.5deg); }
+    96% {
+      transform: translate(1px, 0px) rotate(0.5deg); }
+    98% {
+      transform: translate(0px, 0px) rotate(0.5deg); }
+    0%, 100% {
+      transform: translate(0, 0) rotate(0); } }
+  
+  .shake-little,
+  .shake-trigger:hover .shake-little, .shake-little.shake-freeze, .shake-little.shake-constant {
+    animation-name: shake-little;
+    animation-duration: 100ms;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite; }
+
+    /* Shake END */
