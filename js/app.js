@@ -234,7 +234,7 @@ function battleScene(enemyNumber, name, enemydamage, teamNumber, teamName, class
                     switch (enemyArrayList[i]) {
                         case enemyArrayList[0]:
                             
-                            enemies[0].health -= heroes[0].attack;
+                            enemies[i].health -= heroes[0].attack;
                             
                             //console.log(enemies[0].health)
                             if (parseInt(enemies[0].health) < parseInt(enemies[0].maxHealth * .25)) {
@@ -251,7 +251,7 @@ function battleScene(enemyNumber, name, enemydamage, teamNumber, teamName, class
                             break;
                         case enemyArrayList[1]:
                             
-                            enemies[1].health -= heroes[0].attack;
+                            enemies[i].health -= heroes[0].attack;
                             
                             if (parseInt(enemies[1].health) < parseInt(enemies[1].maxHealth * .25)) {
                                 enemyArrayList[1].querySelector('.healthbox').style.backgroundColor = 'red';
