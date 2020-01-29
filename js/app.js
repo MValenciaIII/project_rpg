@@ -82,15 +82,17 @@ function characters(text, characterChatColor, name, mediaPath, buttonOne = '' , 
     dialogueBox.className = ('col-sm-10 col-xs-8 dialogueBox');
     characterChatBox.appendChild(dialogueBox);
 
-    if (characterName.innerHTML == 'Hero') {
-        picture.className = ('col-xs-4 col-sm-4 skull_menu')
-        dialogueBox.className = ('col-sm-8 col-xs-8')
-    }
-
+    
     let dialogue = document.createElement('p');
     dialogue.innerHTML = text
     dialogueBox.appendChild(dialogue);
     
+    if (characterName.innerHTML == 'Hero') {
+        picture.className = ('col-xs-4 col-sm-4 skull_menu')
+        dialogueBox.className = ('col-sm-8 col-xs-8')
+        characterName.style.color = 'white'
+        dialogue.style.color = 'white'
+    }
 
 
     let color = characterChatBox
@@ -122,7 +124,7 @@ function village () {
     'gray',  'narrator', 'media/transparent.png', 'Wake up', 'Sleep more')
     let wakeUp = document.getElementById('optionOne');
     wakeUp.addEventListener('click', (event) => {
-        characters('I believe I should be getting up.' , '#442715', 'Hero', 'media/transparent.png')
+        characters('I believe I should be getting up.' , '#003356', 'Hero', 'media/transparent.png')
         wakeUp.disabled = true;
         sleepMore.disabled = true
 
@@ -132,7 +134,7 @@ function village () {
     });
     let sleepMore = document.getElementById('optionTwo');
     sleepMore.addEventListener('click', (event) => {
-        characters('I think I will stay in bed for a bit more..', '#442715', 'Hero' , 'media/transparent.png')
+        characters('I think I will stay in bed for a bit more..', '#003356', 'Hero' , 'media/transparent.png')
         sleepMore.disabled = true
         wakeUp.disabled = true;
     });
@@ -228,14 +230,14 @@ function battleScene(enemyNumber, name, enemydamage, teamNumber, teamName, class
         let enemynodeList = document.querySelectorAll('.enemyText');
         let enemyArrayList = Array.from(enemynodeList)
         for (let i = 0; i < enemyArrayList.length ; i++) { 
-            
+            debugger
             enemyArrayList[i].addEventListener('click', function attackingEnemy() {
                 if (no) {
                     switch (enemyArrayList[i]) {
                         case enemyArrayList[0]:
                             
                             enemies[0].health -= heroes[0].attack;
-                            
+                            debugger
                             //console.log(enemies[0].health)
                             if (parseInt(enemies[0].health) < parseInt(enemies[0].maxHealth * .25)) {
                                 enemyArrayList[0].querySelector('.healthbox').style.backgroundColor = 'red';
@@ -252,7 +254,7 @@ function battleScene(enemyNumber, name, enemydamage, teamNumber, teamName, class
                         case enemyArrayList[1]:
                             
                             enemies[1].health -= heroes[0].attack;
-                            
+                            debugger
                             if (parseInt(enemies[1].health) < parseInt(enemies[1].maxHealth * .25)) {
                                 enemyArrayList[1].querySelector('.healthbox').style.backgroundColor = 'red';
                             }
@@ -299,17 +301,18 @@ function battleScene(enemyNumber, name, enemydamage, teamNumber, teamName, class
                     for (let j = 0; j < enemyNumber; j++) {
                         const element = enemyNumber[j];
                         if (!no) {
-                            // function getRandonInt(max) {
-                            //     return Math.floor(Math.random() * Math.floor(max));
-                            // }
-                            // switch (getRandonInt(20)) {
-                            //     case value:
+                            function getRandonInt(max) {
+                                return Math.floor(Math.random() * Math.floor(max));
+                            }
+                            switch (getRandonInt(20)) {
+                                case max == 20:
+                                heroes[0].health -= (2 * enemies[j].attack)
                                     
-                            //         break;
+                                    break;
                             
-                            //     default:
-                            //         break;
-                            // }
+                                default:
+                                    break;
+                            }
  
                             heroes[0].health -= enemies[j].attack
                             console.log(heroes[0].health);
@@ -322,6 +325,6 @@ function battleScene(enemyNumber, name, enemydamage, teamNumber, teamName, class
     }//Function initateBattle
 
 }//Function Battlescene End
-battleScene(2, 'skeleton', 5, 1, 'Heroes', 'fightSceneOne' )
+// battleScene(2, 'skeleton', 5, 1, 'Heroes', 'fightSceneOne' )
 // battleScene(1, 'yo', 2, 1, 'Heroes', 'fightSceneTwo','fightSceneOne' )
 
