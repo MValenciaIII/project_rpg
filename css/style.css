@@ -117,6 +117,30 @@ body {
     text-align: center;
 }
 
+.characterAnimation img{
+  position: relative;
+}
+
+.villageWoman {
+  position: absolute;
+  bottom: 40px;
+  left: 0px;
+    width: 66px;
+    height: 100px;
+    /* margin-top: 60px; */
+    /* margin-right: 22px; */
+    background-image: url(../media//rightLady.png);
+    animation: walkingToDoor 1s steps(3) forwards;
+
+}
+
+@keyframes walkingToDoor {
+  100% { background-position: 200px 0;
+    transform: translateX(360px)
+  };
+
+}
+
 /* Village Scene End */
 
 /* Character Chat Style */

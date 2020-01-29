@@ -127,7 +127,7 @@ function village () {
         characters('I believe I should be getting up.' , '#003356', 'Hero', 'media/transparent.png')
         wakeUp.disabled = true;
         sleepMore.disabled = true
-
+        document.querySelector('.characterAnimation div').className = 'villageWoman';
         setTimeout(() => {
             characters('You began to hear very heavy and rapid knocking and look over.' ,'gray' , 'narrator', 'media/transparent.png')
         }, 3000);
@@ -301,6 +301,7 @@ function battleScene(enemyNumber, name, enemydamage, teamNumber, teamName, class
                     for (let j = 0; j < enemyNumber; j++) {
                         const element = enemyNumber[j];
                         if (!no) {
+                            var max = 20;
                             function getRandonInt(max) {
                                 return Math.floor(Math.random() * Math.floor(max));
                             }
@@ -309,12 +310,19 @@ function battleScene(enemyNumber, name, enemydamage, teamNumber, teamName, class
                                 heroes[0].health -= (2 * enemies[j].attack)
                                     
                                     break;
-                            
+                                case max > 13 && max < 20:
+                                heroes[0].health -= enemies[j].attack
+                                    
+                                    break;
+                                case max < 13:
+                                heroes[0].health -= 0
+                                            
+                                    break;
                                 default:
                                     break;
                             }
  
-                            heroes[0].health -= enemies[j].attack
+                            
                             console.log(heroes[0].health);
                         }
                         //make a switch and make a miss with .random
