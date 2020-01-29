@@ -111,6 +111,8 @@ function characters(text, characterChatColor, name, mediaPath, buttonOne = '' , 
     optionTwo.innerHTML = buttonTwo;
     dialogueBox.appendChild(optionTwo);
     if (optionOne.innerHTML == '' && optionTwo.innerHTML == '') {
+        optionOne.id = '';
+        optionTwo.id = '';
         optionOne.style.display = 'none'
         optionTwo.style.display = 'none'
 
@@ -125,11 +127,35 @@ function village () {
     let wakeUp = document.getElementById('optionOne');
     wakeUp.addEventListener('click', (event) => {
         characters('I believe I should be getting up.' , '#003356', 'Hero', 'media/transparent.png')
-        wakeUp.disabled = true;
-        sleepMore.disabled = true
         document.querySelector('.characterAnimation div').className = 'villageWoman';
+        wakeUp.disabled = true;
+        sleepMore.disabled = true;
         setTimeout(() => {
             characters('You began to hear very heavy and rapid knocking and look over.' ,'gray' , 'narrator', 'media/transparent.png')
+            setTimeout(() => {
+                characters('Please please help me. It\'s an emergency!', 'lightblue', 'lady' , 'media/transparent.png' )
+                document.querySelector('.characterAnimation div').className = 'villageWomanBack';
+                setTimeout(() => { 
+                    characters('Do you open the door?', 'gray', 'Narrator' , 'media/transparent.png', 'Open the door', 'Ignore it' )
+                    var openDoor = document.querySelectorAll('#optionOne')[1];
+                    var ignoreHer = document.querySelectorAll('#optionTwo')[1];
+                    debugger
+                    openDoor.addEventListener('click',  () => {
+                        opening();
+
+                        openDoor.disabled = true;
+                        ignoreHer.disabled = true;
+                    })
+                    ignoreHer.addEventListener('click', () => {
+                        ignore();
+
+                        openDoor.disabled = true;
+                        ignoreHer.disabled = true;
+                    })
+                        
+                        
+                }, 2000);
+            }, 1000);
         }, 3000);
     });
     let sleepMore = document.getElementById('optionTwo');
@@ -138,6 +164,17 @@ function village () {
         sleepMore.disabled = true
         wakeUp.disabled = true;
     });
+    function opening() {
+        characters('What\'s wrong?','#003356', 'Hero',  'media/transparent.png')
+
+    }
+    function ignore () {
+        characters('Hopefully she goes away...','#003356', 'Hero',  'media/transparent.png')
+
+    }
+
+    
+
 
 
 
@@ -149,37 +186,37 @@ function village () {
 
 }
 
-function battleScene(enemyNumber, name, enemydamage, teamNumber, teamName, classScenario) {
+var enemies = []
+function battleScene(enemyNumber, name, enemydamage, enemyHealth, teamNumber, teamName, classScenario) {
     var scenario = document.getElementsByClassName(classScenario)[0].style.display = 'initial';
     // var hideScenario = document.getElementsByClassName(hideclassScenario)[0].style.display = 'none';
     var hideSceneOne = document.getElementsByClassName('village')[0].style.display = 'none';
-
+    
     let attackButton = document.getElementById('attack');
     // let healButton = document.getElementById('heal');
-   
-    var enemies = []
-    var enemyDetails = {};
-
-
-        var enemiesHealth = document.getElementsByClassName('enemyHealthBar')[0];
-        for (let i = 0; i < enemyNumber; i++) {
+    
+    
+    
+    var enemiesHealth = document.getElementsByClassName('enemyHealthBar')[0];
+    for (let i = 0; i < enemyNumber; i++) {
+            var enemyDetails = {};
             const element = enemyNumber[i];
             let row = document.createElement('div')
-            row.className = 'row enemyText'
+            row.className = 'row enemyText';
             enemiesHealth.appendChild(row)
             let healthbox = document.createElement('div');
             healthbox.className = 'healthbox col-sm-5 col-xs-3'
-            healthbox.setAttribute('data-enemy', [i]);
-            healthbox.setAttribute('value', 50);
+            healthbox.setAttribute('value', enemyHealth);
             row.appendChild(healthbox);
             healthbox = enemyNumber;
             let enemyName = document.createElement('p');
+            enemyName.setAttribute('data-enemy', [i]);
             enemyName.className = 'col-sm-6 col-xs-3 enemyTextName'
             row.appendChild(enemyName);
             enemyName.innerHTML = name;
 
-            let numberHealth = document.getElementsByClassName('healthbox')[0].getAttribute('value');
-            enemyDetails.name = name;
+            let numberHealth = document.getElementsByClassName('healthbox')[i].getAttribute('value');
+            enemyDetails.name = name + ' ' + i;
             enemyDetails.maxHealth = numberHealth;
             enemyDetails.health = numberHealth;
             enemyDetails.attack = enemydamage
@@ -189,10 +226,10 @@ function battleScene(enemyNumber, name, enemydamage, teamNumber, teamName, class
 
         }
         var heroes = []
-        var heroDetails = {}
-
+        
         let herosHealth = document.getElementsByClassName('yourHealthBar')[0];
         for (let i = 0; i < teamNumber; i++) {
+            var heroDetails = {}
             const element = teamNumber[i];
             let row = document.createElement('div')
             row.className = 'row heroText'
@@ -228,111 +265,55 @@ function battleScene(enemyNumber, name, enemydamage, teamNumber, teamName, class
         
         let no = true;
         let enemynodeList = document.querySelectorAll('.enemyText');
-        let enemyArrayList = Array.from(enemynodeList)
-        for (let i = 0; i < enemyArrayList.length ; i++) { 
-            debugger
-            enemyArrayList[i].addEventListener('click', function attackingEnemy() {
+        for (let i = 0; i < enemynodeList.length ; i++) { 
+            enemynodeList[i].addEventListener('click', function attackingEnemy() {
+                
                 if (no) {
-                    switch (enemyArrayList[i]) {
-                        case enemyArrayList[0]:
-                            
-                            enemies[0].health -= heroes[0].attack;
-                            debugger
-                            //console.log(enemies[0].health)
-                            if (parseInt(enemies[0].health) < parseInt(enemies[0].maxHealth * .25)) {
-                                enemyArrayList[0].querySelector('.healthbox').style.backgroundColor = 'red';
-                            }
-                            else if (parseInt(enemies[0].health) < parseInt(enemies[0].maxHealth * .50)) {
-                                enemyArrayList[0].querySelector('.healthbox').style.backgroundColor = 'orange';
-                            }
-                            else if (parseInt(enemies[0].health) < parseInt(enemies[0].maxHealth * .75)) {
-                                enemyArrayList[0].querySelector('.healthbox').style.backgroundColor = 'yellow';
-                            }
-                            no = false;
-                            
-                            break;
-                        case enemyArrayList[1]:
-                            
-                            enemies[1].health -= heroes[0].attack;
-                            debugger
-                            if (parseInt(enemies[1].health) < parseInt(enemies[1].maxHealth * .25)) {
-                                enemyArrayList[1].querySelector('.healthbox').style.backgroundColor = 'red';
-                            }
-                            else if (parseInt(enemies[1].health) < parseInt(enemies[1].maxHealth * .50)) {
-                                enemyArrayList[1].querySelector('.healthbox').style.backgroundColor = 'orange';
-                            }
-                            else if (parseInt(enemies[1].health) < parseInt(enemies[1].maxHealth * .75)) {
-                                enemyArrayList[1].querySelector('.healthbox').style.backgroundColor = 'yellow';
-                            }
-                            no = false;
-                            break;
-                        case enemyArrayList[2]:
-                            console.log('3')
-                            enemies[2].health -= heroes[0].attack;
-                            if (parseInt(enemies[2].health) < parseInt(enemies[2].maxHealth * .25)) {
-                                enemyArrayList[2].querySelector('.healthbox').style.backgroundColor = 'red';
-                            }
-                            else if (parseInt(enemies[2].health) < parseInt(enemies[2].maxHealth * .50)) {
-                                enemyArrayList[2].querySelector('.healthbox').style.backgroundColor = 'orange';
-                            }
-                            else if (parseInt(enemies[2].health) < parseInt(enemies[2].maxHealth * .75)) {
-                                enemyArrayList[2].querySelector('.healthbox').style.backgroundColor = 'yellow';
-                            }
-                            no = false;
-                            break;
-                        case enemyArrayList[3]:
-                            console.log('4')
-                            enemies[3].health -= heroes[0].attack;
-                            if (parseInt(enemies[3].health) < parseInt(enemies[3].maxHealth * .25)) {
-                                enemyArrayList[3].querySelector('.healthbox').style.backgroundColor = 'red';
-                            }
-                            else if (parseInt(enemies[3].health) < parseInt(enemies[3].maxHealth * .50)) {
-                                enemyArrayList[3].querySelector('.healthbox').style.backgroundColor = 'orange';
-                            }
-                            else if (parseInt(enemies[3].health) < parseInt(enemies[3].maxHealth * .75)) {
-                                enemyArrayList[3].querySelector('.healthbox').style.backgroundColor = 'yellow';
-                            }
-                            no = false;
-                            break;
-                        default:
-                                no = false;
-                            break;
-                    }//switch End
+                    
+                    let enemy = event.target.getAttribute('data-enemy') * 1;
+
+                    enemies[enemy].health -= heroes[0].attack;
+                    enemynodeList[enemy].querySelector('.healthbox').setAttribute('value', enemies[enemy].health - heroes[0].attack);
+                    if (parseInt(enemies[enemy].health) < parseInt(enemies[enemy].maxHealth * .25)) {
+                        enemynodeList[enemy].querySelector('.healthbox').style.backgroundColor = 'red';
+                    }
+                    else if (parseInt(enemies[enemy].health) < parseInt(enemies[enemy].maxHealth * .50)) {
+                        enemynodeList[enemy].querySelector('.healthbox').style.backgroundColor = 'orange';
+                    }
+                    else if (parseInt(enemies[enemy].health) < parseInt(enemies[enemy].maxHealth * .75)) {
+                        enemynodeList[enemy].querySelector('.healthbox').style.backgroundColor = 'yellow';
+                    }
+                    no = false;
+                                 
                     for (let j = 0; j < enemyNumber; j++) {
                         const element = enemyNumber[j];
                         if (!no) {
-                            var max = 20;
-                            function getRandonInt(max) {
+                            function getRandomInt(max) {
                                 return Math.floor(Math.random() * Math.floor(max));
-                            }
-                            switch (getRandonInt(20)) {
-                                case max == 20:
-                                heroes[0].health -= (2 * enemies[j].attack)
-                                    
-                                    break;
-                                case max > 13 && max < 20:
-                                heroes[0].health -= enemies[j].attack
-                                    
-                                    break;
-                                case max < 13:
+                              }
+                              let max = getRandomInt(20);
+                              debugger
+                            if (max == 20) {
+                                heroes[0].health -= (2 * enemies[enemy].attack)
+                                console.log(heroes[0].health);
+                                
+                            } else if (max < 20 && max >= 13) {
+                                heroes[0].health -= enemies[enemy].attack
+                                console.log(heroes[0].health);
+
+                            } else if (max < 13) {
                                 heroes[0].health -= 0
-                                            
-                                    break;
-                                default:
-                                    break;
+                                console.log(heroes[0].health); 
+
                             }
- 
-                            
-                            console.log(heroes[0].health);
                         }
                         //make a switch and make a miss with .random
-                    }
+                    }//End of enemy turn
                 }//Conditional End
             });//eventlistender End
         }//for loop End
     }//Function initateBattle
-
 }//Function Battlescene End
-// battleScene(2, 'skeleton', 5, 1, 'Heroes', 'fightSceneOne' )
+// battleScene(2, 'skeleton', 5, 50, 1, 'Heroes', 'fightSceneOne' )
 // battleScene(1, 'yo', 2, 1, 'Heroes', 'fightSceneTwo','fightSceneOne' )
 

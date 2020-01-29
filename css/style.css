@@ -123,22 +123,65 @@ body {
 
 .villageWoman {
   position: absolute;
-  bottom: 40px;
+  bottom: 10%;
   left: 0px;
-    width: 66px;
-    height: 100px;
-    /* margin-top: 60px; */
-    /* margin-right: 22px; */
+    width: 35px;
+    height: 53px;
     background-image: url(../media//rightLady.png);
-    animation: walkingToDoor 1s steps(3) forwards;
+    animation: walkingToDoor 3s steps(3) forwards;
+    
 
 }
 
 @keyframes walkingToDoor {
-  100% { background-position: 200px 0;
-    transform: translateX(360px)
-  };
+    20% { background-position: 106px 0;
+        left: 09%;
+      }
 
+    40% {
+    left: 19%;
+    }
+    60% { background-position: 106px 0;
+    left: 29%;
+    }
+    80% {
+    left: 39%;
+    }
+            
+    100% { background-position: 106px 0;
+    left: 48%;
+  }
+
+}
+
+.villageWomanBack {
+    position: absolute;
+    bottom: 12%;
+    left: 51%;
+    width: 33px;
+    height: 52px;
+    background-image: url(../media//backLady.png);
+    animation: backturned 2s steps(3) forwards;
+
+}
+@keyframes backturned {
+    20% { background-position: 98px 0;
+    bottom: 12%;
+    }
+    40% { 
+    bottom: 13%;
+    }
+    60% { background-position: 98px 0;
+    bottom: 14%;
+    }
+    80% { 
+    bottom: 15%;
+    }
+    100% {
+        background-position: 98px 0;
+        bottom: 16%;
+
+    }
 }
 
 /* Village Scene End */
@@ -147,8 +190,8 @@ body {
 
 .characterText {
     border: gray solid 3px;
-    height: auto;
-    overflow-y: auto;
+    height: 485px;
+    overflow-y: scroll;
 }
 
 .characterName {
