@@ -4,21 +4,31 @@
 function menu() {
     //Want to add transition to buttons and changes.
     //D20 dice?? 
+    document.querySelector('.menuButtons').className = 'menuButtons sceneTransition'
     var startGame = document.getElementById('startGame');
     var hideInstructions = document.getElementsByClassName('instructions')[0].style.display = 'none';
-    var hideSceneOne = document.getElementsByClassName('village')[0].style.display = 'none';
+    var hideSceneOne = document.getElementsByClassName('village')[0];
+    hideSceneOne.style.display = 'none';
     var hideFightOne = document.getElementsByClassName('fightSceneOne')[0].style.display = 'none';
-
+    var hideSceneTransition = document.querySelector('.villageSceneTransition');
+    hideSceneTransition.style.display = 'none';
     let background = document.querySelector('body');
     startGame.addEventListener('click', clearMenu);
     
     
     function clearMenu() {
         var hideMenu = document.getElementsByClassName('menu')[0].style.display = 'none';
+        hideSceneTransition.style.display = 'initial';
         background.style.backgroundColor = 'black'
-
         village();
-        
+        hideSceneOne.style.display = 'none';
+        hideSceneTransition.className = 'sceneTransition'
+        setTimeout(() => {
+        hideSceneOne.style.display = 'initial';
+        hideSceneTransition.style.display = 'none';
+        let rowSceneOne = document.querySelector('.village .gameSceneOne').className = 'row gameSceneOne villageFadingIn'
+        }, 5000);
+
         return hideMenu + background;
     }
     
@@ -26,6 +36,7 @@ function menu() {
     instructions.addEventListener('click', instructionMenu);
     
     function instructionMenu() {
+        let transitionbuttons = document.querySelector('.instructions').className = 'instructions sceneTransition';
         let hideButtons = document.getElementsByClassName('menuButtons')[0].style.display = 'none';
         let showInstructions = document.getElementsByClassName('instructions')[0].style.display = 'block';
         
@@ -36,7 +47,8 @@ function menu() {
     backToMenu.addEventListener('click', sendToMenu)
 
     function sendToMenu() {
-        let hideButtons = document.getElementsByClassName('menuButtons')[0].style.display = 'initial';
+        let hideButtons = document.querySelector('.menuButtons').style.display = 'initial';
+        document.querySelector('.menuButtons').className = 'menuButtons sceneTransition'
         let hideInstructions = document.getElementsByClassName('instructions')[0].style.display = 'none';
 
         return hideInstructions + hideButtons;
@@ -125,7 +137,7 @@ function village () {
     characters('You start to notice you are about to wake up... Do you choose to wake up or sleep more?', 
     'gray',  'narrator', 'media/transparent.png', 'Wake up', 'Sleep more')
     let wakeUp = document.getElementById('optionOne');
-    wakeUp.addEventListener('click', (event) => {
+    wakeUp.addEventListener('click', (event) => { //Decision 1 (Wake up) 
         characters('I believe I should be getting up.' , '#003356', 'Hero', 'media/transparent.png')
         document.querySelector('.characterAnimation div').className = 'villageWoman';
         wakeUp.disabled = true;
@@ -136,6 +148,7 @@ function village () {
 
             setTimeout(() => {
                 characters('Please please help me. It\'s an emergency!', 'lightblue', 'lady' , 'media/transparent.png' )
+
                 document.querySelector('.characterAnimation div').className = 'villageWomanBack';
 
                 setTimeout(() => { 
@@ -159,16 +172,33 @@ function village () {
                         
                 }, 2000);//End of Decision Door open or ignore.
             }, 1000);// end of Lady going nuts
-        }, 3000); // End of wakeUp event listener
+        }, 2000); // End of wakeUp event listener
     });
     let sleepMore = document.getElementById('optionTwo');
-    sleepMore.addEventListener('click', (event) => {
+    sleepMore.addEventListener('click', (event) => { //Decision 1 (Sleep more)
         characters('I think I will stay in bed for a bit more..', '#003356', 'Hero' , 'media/transparent.png')
         sleepMore.disabled = true
         wakeUp.disabled = true;
+        document.querySelector('.characterAnimation div').className = 'villageWoman';
+        setTimeout(() => {
+            characters('You began to hear very heavy and rapid knocking' ,'gray' , 'narrator', 'media/transparent.png', 'Get up?', 'ignore it?')
+            document.querySelector('.characterAnimation div').className = 'villageWomanBack';
+            let getUp = document.querySelectorAll('#optionOne')[1];
+            let ignoreWoman = document.querySelectorAll('#optionTwo')[1];
+            getUp.addEventListener('click', () => {
+                characters('Hold on I\'m coming to open the door!', '#003356', 'Hero','media/transparent.png'  )
+                setTimeout(() => {
+                    opening()
+                }, 2000);
+            })
+        }, 2000);
     });
-    function opening() {
-        characters('What\'s wrong?','#003356', 'Hero',  'media/transparent.png')
+
+    function opening() { //
+        characters('What\'s wrong? Who are you?','#003356', 'Hero',  'media/transparent.png')
+        setTimeout(() => {
+            characters('My name is Julie, and my husband hasn\'t came home. I need your help.', 'lightblue', )
+        }, 2000);
 
     }
     function ignore () {

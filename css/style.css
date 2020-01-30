@@ -62,6 +62,50 @@ body {
     margin-left: -35px;
 }
 
+.sceneTransition  h1{
+    font-family: 'Nice Nightie';
+    font-size: 80px;
+    text-align: center;
+    padding: 18%;
+    background-color: black;
+    background-size: cover;
+    animation: both 5s fading;
+    z-index: 2;
+}
+
+.sceneTransition {
+    animation: both 5s villagefade;
+}
+
+@keyframes fading {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+ }
+}
+
+.sceneTransitionFadeOut {
+    animation:  3s fadeOut;
+    
+}
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+ }
+}
+
+.instructions {
+    font-family: 'Eight Bit Dragon';
+    font-size: 20px;
+}
 /* Menu End */
 
 .skull_menu {
@@ -100,6 +144,7 @@ body {
     }
 
     .menu {
+        padding-bottom: 114px;
         background-image: url(../media/8-bitFire.gif);
         background-repeat: no-repeat;
         background-position: bottom ;
@@ -110,12 +155,26 @@ body {
 }
 
 /* Village */
+.villageFadingIn {
+    animation: both 3s villagefade;
+}
+@keyframes villagefade {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
 .village h1{
-    /* fade h1 in */
+
     font-family: 'Nice Nightie';
     font-size: 60px;
     text-align: center;
 }
+
 
 .characterAnimation img{
   position: relative;
@@ -128,27 +187,30 @@ body {
     width: 35px;
     height: 53px;
     background-image: url(../media//rightLady.png);
-    animation: walkingToDoor 3s steps(3) forwards;
+    animation: walkingToDoor 3s steps(3) forwards infinite ;
     
 
 }
 
 @keyframes walkingToDoor {
-    20% { background-position: 106px 0;
+    20% { 
+        
         left: 09%;
       }
 
     40% {
+        
     left: 19%;
     }
     60% { background-position: 106px 0;
     left: 29%;
     }
     80% {
+        
     left: 39%;
     }
             
-    100% { background-position: 106px 0;
+    100% { 
     left: 48%;
   }
 
@@ -213,7 +275,6 @@ body {
     background-color: gray;
     margin: 10px 0px;
     height: auto;
-    /* overflow-y: auto; */
     animation: fade ease-in 2s 1;
 }
 
