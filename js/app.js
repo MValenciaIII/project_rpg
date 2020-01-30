@@ -130,16 +130,19 @@ function village () {
         document.querySelector('.characterAnimation div').className = 'villageWoman';
         wakeUp.disabled = true;
         sleepMore.disabled = true;
+
         setTimeout(() => {
             characters('You began to hear very heavy and rapid knocking and look over.' ,'gray' , 'narrator', 'media/transparent.png')
+
             setTimeout(() => {
                 characters('Please please help me. It\'s an emergency!', 'lightblue', 'lady' , 'media/transparent.png' )
                 document.querySelector('.characterAnimation div').className = 'villageWomanBack';
+
                 setTimeout(() => { 
                     characters('Do you open the door?', 'gray', 'Narrator' , 'media/transparent.png', 'Open the door', 'Ignore it' )
                     var openDoor = document.querySelectorAll('#optionOne')[1];
                     var ignoreHer = document.querySelectorAll('#optionTwo')[1];
-                    debugger
+                    
                     openDoor.addEventListener('click',  () => {
                         opening();
 
@@ -154,9 +157,9 @@ function village () {
                     })
                         
                         
-                }, 2000);
-            }, 1000);
-        }, 3000);
+                }, 2000);//End of Decision Door open or ignore.
+            }, 1000);// end of Lady going nuts
+        }, 3000); // End of wakeUp event listener
     });
     let sleepMore = document.getElementById('optionTwo');
     sleepMore.addEventListener('click', (event) => {
