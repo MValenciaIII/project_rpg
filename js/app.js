@@ -60,11 +60,6 @@ menu();
 //NaN !=  NaN
 //Use an object to hold all conversations. Then call it and make a function to change the color of the conversation depending on the person.
 //store images in a rray
-var facePicture = [
-    {name: 'Skeleton' , image: 'media/frame-1.png'},
-    {name: 'Narrator', image: 'media/transparent.png'}
-    
-]
 
 function characters(text, characterChatColor, name, mediaPath, buttonOne = '' , buttonTwo = '' ) {
     let characterText = document.getElementsByClassName('characterText')[0];
@@ -176,17 +171,17 @@ function village () {
     });
     let sleepMore = document.getElementById('optionTwo');
     sleepMore.addEventListener('click', (event) => { //Decision 1 (Sleep more)
-        characters('I think I will stay in bed for a bit more..', '#003356', 'Hero' , 'media/transparent.png')
+        characters('I think I will stay in bed for a bit more..', '#003356', 'Hero' , 'media/transparent.png');
         sleepMore.disabled = true
         wakeUp.disabled = true;
         document.querySelector('.characterAnimation div').className = 'villageWoman';
         setTimeout(() => {
-            characters('You began to hear very heavy and rapid knocking' ,'gray' , 'narrator', 'media/transparent.png', 'Get up?', 'ignore it?')
+            characters('You began to hear very heavy and rapid knocking' ,'gray' , 'narrator', 'media/transparent.png', 'Get up?', 'ignore it?');
             document.querySelector('.characterAnimation div').className = 'villageWomanBack';
             let getUp = document.querySelectorAll('#optionOne')[1];
             let ignoreWoman = document.querySelectorAll('#optionTwo')[1];
             getUp.addEventListener('click', () => {
-                characters('Hold on I\'m coming to open the door!', '#003356', 'Hero','media/transparent.png'  )
+                characters('Hold on I\'m coming to open the door!', '#003356', 'Hero','media/transparent.png'  );
                 setTimeout(() => {
                     opening()
                 }, 2000);
@@ -195,14 +190,15 @@ function village () {
     });
 
     function opening() { //
-        characters('What\'s wrong? Who are you?','#003356', 'Hero',  'media/transparent.png')
+        characters('What\'s wrong? Who are you?','#003356', 'Hero',  'media/transparent.png');
         setTimeout(() => {
-            characters('My name is Julie, and my husband hasn\'t came home. I need your help.', 'lightblue', )
+            characters('My name is Julie, and my husband hasn\'t came home. I need your help. My husband has been gone for days. Last time he took the wagon to grab lumber. Please find him.', 'lightblue', 'Julie', 'media/profileLady.png', 'Help her?', 'Deny the quest');
+            
         }, 2000);
 
     }
     function ignore () {
-        characters('Hopefully she goes away...','#003356', 'Hero',  'media/transparent.png')
+        characters('Hopefully she goes away...','#003356', 'Hero',  'media/transparent.png');
 
     }
 
