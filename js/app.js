@@ -193,7 +193,12 @@ function village () {
         characters('What\'s wrong? Who are you?','#003356', 'Hero',  'media/transparent.png');
         setTimeout(() => {
             characters('My name is Julie, and my husband hasn\'t came home. I need your help. My husband has been gone for days. Last time he took the wagon to grab lumber. Please find him.', 'lightblue', 'Julie', 'media/profileLady.png', 'Help her?', 'Deny the quest');
-            
+            let accept = document.querySelectorAll('#optionOne')[2];
+            let deny = document.querySelectorAll('#optionTwo')[2];
+            accept.addEventListener('click',  () => {
+                characters('Thank you. Thank you. Thank you. This means so much to me, I could not be more grateful!', 'lightblue', 'Julie', 'media/profileLady.png',)
+                characters('You have nothing to worry about. I\'ll do my best to bring him back', '#003356', 'Hero', 'media/transparent.png')
+            })
         }, 2000);
 
     }
