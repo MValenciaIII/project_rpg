@@ -4,20 +4,32 @@
 function menu() {
     //Want to add transition to buttons and changes.
     //D20 dice?? 
-    document.querySelector('.menuButtons').className = 'menuButtons sceneTransition'
+    
+    //Hide everything beside the menu.
     var startGame = document.getElementById('startGame');
     var hideInstructions = document.getElementsByClassName('instructions')[0].style.display = 'none';
     var hideSceneOne = document.getElementsByClassName('village')[0];
-    hideSceneOne.style.display = 'none';
-    var hideFightOne = document.getElementsByClassName('fightSceneOne')[0].style.display = 'none';
+    var hideFightOne = document.getElementsByClassName('fightSceneContainer')[0].style.display = 'none';
+    var hideFightTwo = document.getElementsByClassName('fightSceneContainer')[1].style.display = 'none';
     var hideSceneTransition = document.querySelector('.villageSceneTransition');
-    hideSceneTransition.style.display = 'none';
-    let background = document.querySelector('body');
+    var background = document.querySelector('body');
+    var instructions = document.getElementById('instructions');
+    var backToMenu = document.getElementById('backToMenu');
+    document.querySelector('.menuButtons').className = 'menuButtons sceneTransition';
+    document.querySelector('.endingOne').style.display = 'none';
+    document.querySelector('.dungeonBeginning').style.display = 'none';
+    document.querySelector('.dungeon').style.display = 'none';
+    document.querySelector('.dungeonSceneTransition').style.display = 'none';
     startGame.addEventListener('click', clearMenu);
+    instructions.addEventListener('click', instructionMenu);
+    backToMenu.addEventListener('click', sendToMenu);
+    hideSceneOne.style.display = 'none';
+    hideSceneTransition.style.display = 'none';
     
     
     function clearMenu() {
         var hideMenu = document.getElementsByClassName('menu')[0].style.display = 'none';
+        var rowSceneOne = document.querySelector('.village .gameSceneOne');
         hideSceneTransition.style.display = 'initial';
         background.style.backgroundColor = 'black'
         village();
@@ -26,14 +38,12 @@ function menu() {
         setTimeout(() => {
         hideSceneOne.style.display = 'initial';
         hideSceneTransition.style.display = 'none';
-        let rowSceneOne = document.querySelector('.village .gameSceneOne').className = 'row gameSceneOne villageFadingIn'
+        rowSceneOne.className = 'row gameSceneOne villageFadingIn'
         }, 5000);
 
         return hideMenu + background;
     }
     
-    var instructions = document.getElementById('instructions');
-    instructions.addEventListener('click', instructionMenu);
     
     function instructionMenu() {
         let transitionbuttons = document.querySelector('.instructions').className = 'instructions sceneTransition';
@@ -43,8 +53,6 @@ function menu() {
         return showInstructions + hideButtons;
     }
 
-    var backToMenu = document.getElementById('backToMenu');
-    backToMenu.addEventListener('click', sendToMenu)
 
     function sendToMenu() {
         let hideButtons = document.querySelector('.menuButtons').style.display = 'initial';
@@ -61,8 +69,8 @@ menu();
 //Use an object to hold all conversations. Then call it and make a function to change the color of the conversation depending on the person.
 //store images in a rray
 
-function characters(text, characterChatColor, name, mediaPath, buttonOne = '' , buttonTwo = '' ) {
-    let characterText = document.getElementsByClassName('characterText')[0];
+function characters(classScene,text, characterChatColor, name, mediaPath, buttonOne = '' , buttonTwo = '' ) {
+    let characterText = document.getElementsByClassName('characterText')[classScene];
     let characterChatBox = document.createElement('div');
     characterChatBox.className = ('row box');
     characterText.appendChild(characterChatBox);
@@ -129,25 +137,26 @@ function characters(text, characterChatColor, name, mediaPath, buttonOne = '' , 
 
 function village () {
     var hideSceneOne = document.getElementsByClassName('village')[0].style.display = 'initial';
-    characters('You start to notice you are about to wake up... Do you choose to wake up or sleep more?', 
-    'gray',  'narrator', 'media/transparent.png', 'Wake up', 'Sleep more')
+    characters(0, 'You start to notice you are about to wake up... Do you choose to wake up or sleep more?', 
+    'gray',  'Narrator', 'media/transparent.png', 'Wake up', 'Sleep more')
     let wakeUp = document.getElementById('optionOne');
+    let sleepMore = document.getElementById('optionTwo');
     wakeUp.addEventListener('click', (event) => { //Decision 1 (Wake up) 
-        characters('I believe I should be getting up.' , '#003356', 'Hero', 'media/transparent.png')
+        characters(0, 'I believe I should be getting up.' , '#003356', 'Hero', 'media/transparent.png')
         document.querySelector('.characterAnimation div').className = 'villageWoman';
         wakeUp.disabled = true;
         sleepMore.disabled = true;
 
         setTimeout(() => {
-            characters('You began to hear very heavy and rapid knocking and look over.' ,'gray' , 'narrator', 'media/transparent.png')
+            characters(0, 'You began to hear very heavy and rapid knocking and look over.' ,'gray' , 'Narrator', 'media/transparent.png')
 
             setTimeout(() => {
-                characters('Please please help me. It\'s an emergency!', 'lightblue', 'lady' , 'media/transparent.png' )
+                characters(0, 'Please please help me. It\'s an emergency!', 'lightblue', 'lady' , 'media/profileLady.png' )
 
                 document.querySelector('.characterAnimation div').className = 'villageWomanBack';
 
                 setTimeout(() => { 
-                    characters('Do you open the door?', 'gray', 'Narrator' , 'media/transparent.png', 'Open the door', 'Ignore it' )
+                    characters(0, 'Do you open the door?', 'gray', 'Narrator' , 'media/transparent.png', 'Open the door', 'Ignore it' )
                     var openDoor = document.querySelectorAll('#optionOne')[1];
                     var ignoreHer = document.querySelectorAll('#optionTwo')[1];
                     
@@ -169,69 +178,119 @@ function village () {
             }, 1000);// end of Lady going nuts
         }, 2000); // End of wakeUp event listener
     });
-    let sleepMore = document.getElementById('optionTwo');
-    sleepMore.addEventListener('click', (event) => { //Decision 1 (Sleep more)
-        characters('I think I will stay in bed for a bit more..', '#003356', 'Hero' , 'media/transparent.png');
+    sleepMore.addEventListener('click', () => { //Decision 1 (Sleep more)
+        characters(0, 'I think I will stay in bed for a bit more..', '#003356', 'Hero' , 'media/transparent.png');
         sleepMore.disabled = true
         wakeUp.disabled = true;
         document.querySelector('.characterAnimation div').className = 'villageWoman';
         setTimeout(() => {
-            characters('You began to hear very heavy and rapid knocking' ,'gray' , 'narrator', 'media/transparent.png', 'Get up?', 'ignore it?');
+            characters(0, 'You began to hear very heavy and rapid knocking' ,'gray' , 'Narrator', 'media/transparent.png', 'Get up?', 'ignore it?');
             document.querySelector('.characterAnimation div').className = 'villageWomanBack';
             let getUp = document.querySelectorAll('#optionOne')[1];
             let ignoreWoman = document.querySelectorAll('#optionTwo')[1];
             getUp.addEventListener('click', () => {
-                characters('Hold on I\'m coming to open the door!', '#003356', 'Hero','media/transparent.png'  );
+                characters(0, 'Hold on I\'m coming to open the door!', '#003356', 'Hero','media/transparent.png'  );
                 setTimeout(() => {
                     opening()
                 }, 2000);
+            });
+            ignoreWoman.addEventListener('click', () => {
+                characters(0, 'I don\'t want to get involve with her situation..' , ' gray', 'Narrator', 'media/transparent.png');
+                setTimeout(() => {
+                    ignore();
+                }, 2000);
             })
+
         }, 2000);
     });
 
-    function opening() { //
-        characters('What\'s wrong? Who are you?','#003356', 'Hero',  'media/transparent.png');
+    function opening() { 
+        characters(0, 'What\'s wrong? Who are you?','#003356', 'Hero',  'media/transparent.png');
         setTimeout(() => {
-            characters('My name is Julie, and my husband hasn\'t came home. I need your help. My husband has been gone for days. Last time he took the wagon to grab lumber. Please find him.', 'lightblue', 'Julie', 'media/profileLady.png', 'Help her?', 'Deny the quest');
+            characters(0, 'My name is Julie, and my husband hasn\'t came home. I need your help. My husband has been gone for days. Last time he took the wagon to grab lumber. Please find him.', 'lightblue', 'Julie', 'media/profileLady.png', 'Help her?', 'Deny the quest');
             let accept = document.querySelectorAll('#optionOne')[2];
             let deny = document.querySelectorAll('#optionTwo')[2];
             accept.addEventListener('click',  () => {
-                characters('Thank you. Thank you. Thank you. This means so much to me, I could not be more grateful!', 'lightblue', 'Julie', 'media/profileLady.png',)
-                characters('You have nothing to worry about. I\'ll do my best to bring him back', '#003356', 'Hero', 'media/transparent.png')
+                characters(0, 'Thank you. Thank you. Thank you. This means so much to me, I could not be more grateful!', 'lightblue', 'Julie', 'media/profileLady.png')
+                characters(0, 'You have nothing to worry about. I\'ll do my best to bring him back', '#003356', 'Hero', 'media/transparent.png')
+
+                setTimeout(() => {
+                    sceneTwo();
+                }, 4000);
             })
         }, 2000);
 
     }
     function ignore () {
-        characters('Hopefully she goes away...','#003356', 'Hero',  'media/transparent.png');
-
+        characters(0, 'Hopefully she goes away...','#003356', 'Hero',  'media/transparent.png');
+        setTimeout(() => {
+            characters(0, 'The rapid knock continues to hit your door. Do you answer?', 'gray', 'Narrator','media/transparent.png', 'Open Door?', 'Continue to ignore?');
+            let openDoorFinal = document.querySelectorAll('#optionOne')[2];
+            let ignoreFinal = document.querySelectorAll('#optionTwo')[2];
+            openDoorFinal.addEventListener('click', opening);
+            ignoreFinal.addEventListener('click',  () => {
+                characters(0, 'I\'m sorry for bothering you. I haven\'t seen my husband in so long, and I need help.. Since you\'re not here I guess I\'ll do it on my own', 'lightblue', ' Julie', 'media/profileLady.png')
+                setTimeout(() => {
+                    document.querySelector('.endingOne').style.display = 'initial';
+                    document.querySelector('.village').style.display = 'none'
+                    document.querySelector('.endingOne').className = 'endingTransition';
+                }, 4000);
+            })
+        }, 2000);
     }
 
+
+} //End of Scene One
+
+
+function sceneTwo() {
+    let hideSceneOne = document.getElementsByClassName('village')[0];
+    let hideSceneTwo = document.querySelector('.dungeonSceneTransition');
+    let dungeonSwitch = document.querySelector('.dungeonBeginning');
+    let dungeonSwitchText = document.querySelector('.dungeonBeginning .col-sm-12');
+    let rowSceneTwo = document.querySelector('.dungeon .gameSceneTwo');
+    hideSceneOne.style.display = 'none';
+    dungeonSwitch.style.display = 'initial'
+    dungeonSwitch.className = 'dungeonBeginning dungeonTransition'
+
+    let dungeonText = document.createElement('p');
+    dungeonText.innerHTML = 'As you walk towards the direction of the way Julie pointed, you decide to sit down and take a break. As you sit down down, you black out. You wake up with a big headache in some kind of dungeon jail.'
+    dungeonSwitchText.appendChild(dungeonText);
+    setTimeout(() => {
+        dungeonSwitch.style.display = 'none'
+        hideSceneTwo.style.display = 'initial';
+        hideSceneTwo.className = 'sceneTransition'
+        document.querySelector('.dungeon').style.display = 'none'
+        setTimeout(() => {
+            hideSceneTwo.style.display = 'none'
+            document.querySelector('.dungeon').style.display = 'initial'
+            rowSceneTwo.className = 'row gameSceneTwo villageFadingIn'
+            setTimeout(() => {
+                characters(1, 'Where am i..?', '#003356','Hero', 'media/transparent.png')
+                dungeonDialogue();
+            }, 3000);
+        }, 3000);
+    }, 9000);
+    function dungeonDialogue() {
+        characterChatBox(1, '')
+    }
+
+
     
-
-
-
-
-    // let optionOne = document.getElementById('buttonOne');
-    // let optionTwo = document.getElementById('buttonTwo');
-    // characters('hello', 'gray', 'media/frame-1.png')
-    //optionOne.addEventListener('click', battleScene)
-
+    
 
 }
 
 var enemies = []
-function battleScene(enemyNumber, name, enemydamage, enemyHealth, teamNumber, teamName, classScenario) {
-    var scenario = document.getElementsByClassName(classScenario)[0].style.display = 'initial';
-    // var hideScenario = document.getElementsByClassName(hideclassScenario)[0].style.display = 'none';
+function battleScene(enemyNumber, name, enemydamage, enemyHealth, teamNumber, teamName, fightScene) {
+    var scenario = document.getElementsByClassName('fightSceneContainer')[fightScene].style.display = 'initial';
     var hideSceneOne = document.getElementsByClassName('village')[0].style.display = 'none';
     
     let attackButton = document.getElementById('attack');
-    // let healButton = document.getElementById('heal');
     
     
     
-    var enemiesHealth = document.getElementsByClassName('enemyHealthBar')[0];
+    var enemiesHealth = document.getElementsByClassName('enemyHealthBar')[fightScene];
     for (let i = 0; i < enemyNumber; i++) {
             var enemyDetails = {};
             const element = enemyNumber[i];
@@ -261,7 +320,7 @@ function battleScene(enemyNumber, name, enemydamage, enemyHealth, teamNumber, te
         }
         var heroes = []
         
-        let herosHealth = document.getElementsByClassName('yourHealthBar')[0];
+        let herosHealth = document.getElementsByClassName('yourHealthBar')[fightScene];
         for (let i = 0; i < teamNumber; i++) {
             var heroDetails = {}
             const element = teamNumber[i];
@@ -294,15 +353,15 @@ function battleScene(enemyNumber, name, enemydamage, enemyHealth, teamNumber, te
         
         //while attack is true... 
         //do stuff
-    function initiateBattle () {
-        
-        
-        let no = true;
+    let no = true;
+    function initiateBattle () { 
         let enemynodeList = document.querySelectorAll('.enemyText');
         for (let i = 0; i < enemynodeList.length ; i++) { 
+            
             enemynodeList[i].addEventListener('click', function attackingEnemy() {
-                
                 if (no) {
+                
+                    no = false
                     
                     let enemy = event.target.getAttribute('data-enemy') * 1;
 
@@ -317,7 +376,7 @@ function battleScene(enemyNumber, name, enemydamage, enemyHealth, teamNumber, te
                     else if (parseInt(enemies[enemy].health) < parseInt(enemies[enemy].maxHealth * .75)) {
                         enemynodeList[enemy].querySelector('.healthbox').style.backgroundColor = 'yellow';
                     }
-                    no = false;
+                    
                                  
                     for (let j = 0; j < enemyNumber; j++) {
                         const element = enemyNumber[j];
@@ -326,28 +385,31 @@ function battleScene(enemyNumber, name, enemydamage, enemyHealth, teamNumber, te
                                 return Math.floor(Math.random() * Math.floor(max));
                               }
                               let max = getRandomInt(20);
-                              debugger
+                            //   debugger
                             if (max == 20) {
                                 heroes[0].health -= (2 * enemies[enemy].attack)
                                 console.log(heroes[0].health);
+                                
                                 
                             } else if (max < 20 && max >= 13) {
                                 heroes[0].health -= enemies[enemy].attack
                                 console.log(heroes[0].health);
 
+
                             } else if (max < 13) {
                                 heroes[0].health -= 0
-                                console.log(heroes[0].health); 
-
+                                console.log(heroes[0].health);
                             }
+                            
                         }
                         //make a switch and make a miss with .random
                     }//End of enemy turn
                 }//Conditional End
             });//eventlistender End
         }//for loop End
+        no = true;
     }//Function initateBattle
 }//Function Battlescene End
-// battleScene(2, 'skeleton', 5, 50, 1, 'Heroes', 'fightSceneOne' )
-// battleScene(1, 'yo', 2, 1, 'Heroes', 'fightSceneTwo','fightSceneOne' )
+// battleScene(2, 'skeleton', 5, 50, 1, 'Heroes', 0 )
+// battleScene(1, 'yo', 2, 50,  1, 'Heroes', 1 )
 

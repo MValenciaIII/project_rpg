@@ -246,7 +246,49 @@ body {
     }
 }
 
+.endingTransition h1{
+    font-family: 'Nice Nightie';
+    font-size: 80px;
+    text-align: center;
+    padding: 18%;
+    background-color: black;
+    background-size: cover;
+    animation: forwards 5s ending;
+    z-index: 2;
+}
+
+@keyframes ending {
+    0% {
+        opacity: 0;
+    }
+    100% { 
+        opacity: 1;
+    }
+}
+
 /* Village Scene End */
+
+/* Dungeon Scene */
+
+.dungeon h1 {
+    font-family: 'Nice Nightie';
+    font-size: 60px;
+    text-align: center;
+}
+
+.dungeonTransition p{
+    font-family: 'Nice Nightie';
+    font-size: 50px;
+    text-align: center;
+    padding: 18%;
+    color: gray;
+    background-color: black;
+    background-size: cover;
+    animation: forwards 5s ending;
+    z-index: 2;
+}
+
+/* Dungeon Scene End */
 
 /* Character Chat Style */
 
