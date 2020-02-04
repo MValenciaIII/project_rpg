@@ -142,7 +142,7 @@ function village () {
     let wakeUp = document.getElementById('optionOne');
     let sleepMore = document.getElementById('optionTwo');
     wakeUp.addEventListener('click', (event) => { //Decision 1 (Wake up) 
-        characters(0, 'I believe I should be getting up.' , '#003356', 'Hero', 'media/transparent.png')
+        characters(0, 'I suppose its that time.' , '#003356', 'Hero', 'media/transparent.png')
         document.querySelector('.characterAnimation div').className = 'villageWoman';
         wakeUp.disabled = true;
         sleepMore.disabled = true;
@@ -212,12 +212,22 @@ function village () {
             let deny = document.querySelectorAll('#optionTwo')[2];
             accept.addEventListener('click',  () => {
                 characters(0, 'Thank you. Thank you. Thank you. This means so much to me, I could not be more grateful!', 'lightblue', 'Julie', 'media/profileLady.png')
-                characters(0, 'You have nothing to worry about. I\'ll do my best to bring him back', '#003356', 'Hero', 'media/transparent.png')
-
+                characters(0, 'You have nothing to worry about. I\'ll do my best to bring him back', '#003356', 'Hero', 'media/transparent.png', 'Continue?');
+                accept.disabled = true;
+                deny.disabled = true;
+                let continueSceneTwo = document.querySelectorAll('#optionOne')[3];
+                continueSceneTwo.addEventListener('click',sceneTwo)
+            });
+            deny.addEventListener('click', () => {
+                accept.disabled = true;
+                deny.disabled = true;
+                characters(0, 'I\'m sorry for bothering you. I haven\'t seen my husband in so long, and I need help.. Since you\'re not here I guess I\'ll do it on my own', 'lightblue', ' Julie', 'media/profileLady.png')
                 setTimeout(() => {
-                    sceneTwo();
-                }, 4000);
-            })
+                    document.querySelector('.endingOne').style.display = 'initial';
+                    document.querySelector('.village').style.display = 'none'
+                    document.querySelector('.endingOne').className = 'endingTransition';
+                }, 5000);
+            });
         }, 2000);
 
     }
@@ -227,14 +237,20 @@ function village () {
             characters(0, 'The rapid knock continues to hit your door. Do you answer?', 'gray', 'Narrator','media/transparent.png', 'Open Door?', 'Continue to ignore?');
             let openDoorFinal = document.querySelectorAll('#optionOne')[2];
             let ignoreFinal = document.querySelectorAll('#optionTwo')[2];
-            openDoorFinal.addEventListener('click', opening);
+            openDoorFinal.addEventListener('click', () => {
+                openDoorFinal.disabled = true;
+                ignoreFinal.disabled = true;
+                opening()
+            });
             ignoreFinal.addEventListener('click',  () => {
+                openDoorFinal.disabled = true;
+                ignoreFinal.disabled = true;
                 characters(0, 'I\'m sorry for bothering you. I haven\'t seen my husband in so long, and I need help.. Since you\'re not here I guess I\'ll do it on my own', 'lightblue', ' Julie', 'media/profileLady.png')
                 setTimeout(() => {
                     document.querySelector('.endingOne').style.display = 'initial';
                     document.querySelector('.village').style.display = 'none'
                     document.querySelector('.endingOne').className = 'endingTransition';
-                }, 4000);
+                }, 5000);
             })
         }, 2000);
     }
@@ -272,7 +288,21 @@ function sceneTwo() {
         }, 3000);
     }, 9000);
     function dungeonDialogue() {
-        characterChatBox(1, '')
+        characters(1, 'You look around to observe your surroundings, and as you turn your head you see a man stuck under a wagon. He slowly lifts his head up', 'gray', 'Narrator', 'media/transparent.png')
+        setTimeout(() => {
+            characters(1, 'Oh. Hello there. I\'m a little stuck. I\'m also can\'t feel my legs. A little help would be nice.', '#61706C', 'Man', 'media/profileMan.png', 'Help?', 'Ask a question.')
+            let help = document.querySelectorAll('.dungeon #optionOne')[0];
+            let question = document.querySelectorAll('.dungeon #optionTwo')[0];
+            help.addEventListener('click', () => {
+                characters(1, 'Oh, thank you for getting me out! I\'m not able to walk though you could help me.','#61706C','Man','media/profileMan.png')
+                setTimeout(() => {
+                    characters(1, 'No worries, what is your name and where are we?', '#003356','Hero','media/transparent.png')
+                    setTimeout(() => {
+                        characters(1, 'Oh my name is William, and I\'m not sure but it isn\'t a good place evil people with robes roam here.','#61706C', 'William', 'media/profileMan.png')
+                    }, 3000);
+                }, 3000);
+            })
+        }, 2000);
     }
 
 
