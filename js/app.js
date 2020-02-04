@@ -270,7 +270,7 @@ function sceneTwo() {
     dungeonSwitch.className = 'dungeonBeginning dungeonTransition'
 
     let dungeonText = document.createElement('p');
-    dungeonText.innerHTML = 'As you walk towards the direction of the way Julie pointed, you decide to sit down and take a break. As you sit down down, you black out. You wake up with a big headache in some kind of dungeon jail.'
+    dungeonText.innerHTML = 'As you walk towards the direction of the way Julie pointed, you decide to sit down and take a break. As you sit down down, you black out. You wake up with a big headache in some kind of dungeon.'
     dungeonSwitchText.appendChild(dungeonText);
     setTimeout(() => {
         dungeonSwitch.style.display = 'none'
@@ -283,7 +283,9 @@ function sceneTwo() {
             rowSceneTwo.className = 'row gameSceneTwo villageFadingIn'
             setTimeout(() => {
                 characters(1, 'Where am i..?', '#003356','Hero', 'media/transparent.png')
-                dungeonDialogue();
+                setTimeout(() => {
+                    dungeonDialogue();
+                }, 3000);
             }, 3000);
         }, 3000);
     }, 9000);
@@ -294,26 +296,48 @@ function sceneTwo() {
             let help = document.querySelectorAll('.dungeon #optionOne')[0];
             let question = document.querySelectorAll('.dungeon #optionTwo')[0];
             help.addEventListener('click', function helpMan () {
+                help.disabled = true;
+                question.disabled = true;
                 characters(1, 'Oh, thank you for getting me out! I\'m not able to walk though you could help me.','#61706C','Man','media/profileMan.png')
                 setTimeout(() => {
-                    characters(1, 'No worries, what is your name and where are we?', '#003356','Hero','media/transparent.png')
-                    setTimeout(() => {
-                        characters(1, 'Oh my name is William, and I\'m not sure but it isn\'t a good place evil people with robes roam here.','#61706C', 'William', 'media/profileMan.png');
-                        dungeonDoorOpen()
-                    }, 3000);
-                }, 3000);
+                    dungeonDoorOpen();
+                }, 4000);
             });
             question.addEventListener('click', () => {
-                characters(1, 'Shouldn\'t you help me first? Please?','#61706C', 'William', 'media/profileMan.png');
+                help.disabled = true;
+                question.disabled = true;
+                characters(1, 'Shouldn\'t you help me first? Please?','#61706C', 'Man', 'media/profileMan.png' );
                 setTimeout(() => {
-                    helpMan();
-                }, 4000);
+                    dungeonDoorOpen()
+                }, 3000);
             });
         }, 2000);
     }
 
     function dungeonDoorOpen() {
-        
+        characters(1, 'No worries, what is your name and where are we?', '#003356','Hero','media/transparent.png')
+        setTimeout(() => {
+            characters(1, 'Oh my name is William, and I\'m not sure but it isn\'t a good place. These people with robes roam here and they don\'t look friendly.','#61706C', 'William', 'media/profileMan.png');
+            setTimeout(() => {
+                characters(1,'Have you figured out a way to get out william?', '#003356','Hero','media/transparent.png');
+                setTimeout(() => {
+                    characters(1, 'I haven\'t been able to try I\'ve been under a wagon, but you can check that door','#61706C', 'William', 'media/profileMan.png');
+                    setTimeout(() => {
+                        characters(1, 'Do you try to break the door down or just open it.', 'gray', 'Narrator', 'media/transparent.png', 'Break Down', 'Push on it');
+                        let breakDown = document.querySelectorAll('.dungeon #optionOne')[1];
+                        let push = document.querySelectorAll('.dungeon #optionTwo')[1];
+                        breakDown.addEventListener('click', () => {
+                            characters(1, 'You decided to kick the door and make a loud noise. The people in the robes come in and now you must fight! Prepare yourself!', 'gray', 'Narrator', 'media/transparent.png', 'Continue')
+                            let fightOne = document.querySelectorAll('.dungeon #optionOne')[2];
+
+                            fightOne.addEventListener('click', () => {
+                                battleScene(2, 'skeleton', 5, 50, 1, 'Heroes', 0 )
+                            })
+                        })
+                    }, 3000);//door choice
+                }, 3000);//William can't open the door.
+            }, 3000); // Asking William if he's tried to open the door
+        }, 3000);//What his name is.
     }
     
     
@@ -323,7 +347,7 @@ function sceneTwo() {
 var enemies = []
 function battleScene(enemyNumber, name, enemydamage, enemyHealth, teamNumber, teamName, fightScene) {
     var scenario = document.getElementsByClassName('fightSceneContainer')[fightScene].style.display = 'initial';
-    var hideSceneOne = document.getElementsByClassName('village')[0].style.display = 'none';
+    var hideSceneOne = document.getElementsByClassName('dungeon')[0].style.display = 'none';
     
     let attackButton = document.getElementById('attack');
     
@@ -395,6 +419,8 @@ function battleScene(enemyNumber, name, enemydamage, enemyHealth, teamNumber, te
     let no = true;
     function initiateBattle () { 
         let enemynodeList = document.querySelectorAll('.enemyText');
+        let textAttackBox = document.querySelectorAll('.action')[fightScene]
+        let textAttack;
         for (let i = 0; i < enemynodeList.length ; i++) { 
             
             enemynodeList[i].addEventListener('click', function attackingEnemy() {
@@ -405,17 +431,34 @@ function battleScene(enemyNumber, name, enemydamage, enemyHealth, teamNumber, te
                     let enemy = event.target.getAttribute('data-enemy') * 1;
 
                     enemies[enemy].health -= heroes[0].attack;
+                    textAttack = 'The Hero landed a hit on Skeleton ' + [enemy + 1]; 
+                    textAttackBox.innerHTML += textAttack + '<br>'
+
                     enemynodeList[enemy].querySelector('.healthbox').setAttribute('value', enemies[enemy].health - heroes[0].attack);
-                    if (parseInt(enemies[enemy].health) < parseInt(enemies[enemy].maxHealth * .25)) {
+                    if (parseInt(enemies[enemy].health) <= parseInt(enemies[enemy].maxHealth * 0)) {
+                        enemynodeList[enemy].querySelector('.healthbox').style.backgroundColor = 'black';
+                        textAttack = 'Skeleton ' + [enemy] + ' has been defeated.'
+                        textAttackBox.innerHTML += textAttack + '<br>'
+
+                    }
+                    else if (parseInt(enemies[enemy].health) < parseInt(enemies[enemy].maxHealth * .25)) {
                         enemynodeList[enemy].querySelector('.healthbox').style.backgroundColor = 'red';
+                        textAttack = 'Skeleton ' + [enemy] + ' is barely able to stand.'
+                        textAttackBox.innerHTML += textAttack + '<br>'
+
                     }
                     else if (parseInt(enemies[enemy].health) < parseInt(enemies[enemy].maxHealth * .50)) {
                         enemynodeList[enemy].querySelector('.healthbox').style.backgroundColor = 'orange';
+                        textAttack = 'Skeleton ' + [enemy] + ' is looking pretty rough'
+                        textAttackBox.innerHTML += textAttack + '<br>'
+
                     }
                     else if (parseInt(enemies[enemy].health) < parseInt(enemies[enemy].maxHealth * .75)) {
                         enemynodeList[enemy].querySelector('.healthbox').style.backgroundColor = 'yellow';
+                        textAttack = 'Skeleton ' + [enemy] + ' is looking okay but not the best'
+                        textAttackBox.innerHTML += textAttack + '<br>'
                     }
-                    
+
                                  
                     for (let j = 0; j < enemyNumber; j++) {
                         const element = enemyNumber[j];
@@ -423,22 +466,27 @@ function battleScene(enemyNumber, name, enemydamage, enemyHealth, teamNumber, te
                             function getRandomInt(max) {
                                 return Math.floor(Math.random() * Math.floor(max));
                               }
+
                               let max = getRandomInt(20);
                             //   debugger
                             if (max == 20) {
-                                heroes[0].health -= (2 * enemies[enemy].attack)
-                                console.log(heroes[0].health);
-                                
+                                heroes[0].health -= (2 * enemies[enemy].attack);
+                                textAttack = 'Enemy '+ [j] + ' got lucky and hit you twice the amount of damage!';
+                                textAttackBox.innerHTML += textAttack + '<br>';
                                 
                             } else if (max < 20 && max >= 13) {
                                 heroes[0].health -= enemies[enemy].attack
-                                console.log(heroes[0].health);
+                                textAttack = 'Enemy '+ [j] + ' hit you with ' + enemies[enemy].attack + ' the amount of damage!';
+                                textAttackBox.innerHTML += textAttack + '<br>';
 
 
                             } else if (max < 13) {
                                 heroes[0].health -= 0
-                                console.log(heroes[0].health);
+                                textAttack = 'Enemy '+ [j] + ' missed his attack.';
+                                textAttackBox.innerHTML += textAttack + '<br>';
                             }
+                            textAttack = 'You are left with ' + heroes[0].health + ' health.'
+                            textAttackBox.innerHTML += textAttack + '<br>';
                             
                         }
                         //make a switch and make a miss with .random
