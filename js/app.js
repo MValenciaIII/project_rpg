@@ -293,19 +293,28 @@ function sceneTwo() {
             characters(1, 'Oh. Hello there. I\'m a little stuck. I\'m also can\'t feel my legs. A little help would be nice.', '#61706C', 'Man', 'media/profileMan.png', 'Help?', 'Ask a question.')
             let help = document.querySelectorAll('.dungeon #optionOne')[0];
             let question = document.querySelectorAll('.dungeon #optionTwo')[0];
-            help.addEventListener('click', () => {
+            help.addEventListener('click', function helpMan () {
                 characters(1, 'Oh, thank you for getting me out! I\'m not able to walk though you could help me.','#61706C','Man','media/profileMan.png')
                 setTimeout(() => {
                     characters(1, 'No worries, what is your name and where are we?', '#003356','Hero','media/transparent.png')
                     setTimeout(() => {
-                        characters(1, 'Oh my name is William, and I\'m not sure but it isn\'t a good place evil people with robes roam here.','#61706C', 'William', 'media/profileMan.png')
+                        characters(1, 'Oh my name is William, and I\'m not sure but it isn\'t a good place evil people with robes roam here.','#61706C', 'William', 'media/profileMan.png');
+                        dungeonDoorOpen()
                     }, 3000);
                 }, 3000);
-            })
+            });
+            question.addEventListener('click', () => {
+                characters(1, 'Shouldn\'t you help me first? Please?','#61706C', 'William', 'media/profileMan.png');
+                setTimeout(() => {
+                    helpMan();
+                }, 4000);
+            });
         }, 2000);
     }
 
-
+    function dungeonDoorOpen() {
+        
+    }
     
     
 
