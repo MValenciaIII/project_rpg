@@ -421,11 +421,14 @@ function battleScene(enemyNumber, name, enemydamage, enemyHealth, teamNumber, te
         let enemynodeList = document.querySelectorAll('.enemyText');
         let textAttackBox = document.querySelectorAll('.action')[fightScene]
         let textAttack;
+        if (enemies[i].health <= 0) {
+            console.log('hello')
+        }
         for (let i = 0; i < enemynodeList.length ; i++) { 
             
             enemynodeList[i].addEventListener('click', function attackingEnemy() {
                 if (no) {
-                
+             
                     no = false
                     
                     let enemy = event.target.getAttribute('data-enemy') * 1;
@@ -439,6 +442,8 @@ function battleScene(enemyNumber, name, enemydamage, enemyHealth, teamNumber, te
                         enemynodeList[enemy].querySelector('.healthbox').style.backgroundColor = 'black';
                         textAttack = 'Skeleton ' + [enemy] + ' has been defeated.'
                         textAttackBox.innerHTML += textAttack + '<br>'
+                        enemynodeList[enemy].removeEventListener('click', attackingEnemy)
+                        enemynodeList[enemy].value = 0
 
                     }
                     else if (parseInt(enemies[enemy].health) < parseInt(enemies[enemy].maxHealth * .25)) {
@@ -497,6 +502,6 @@ function battleScene(enemyNumber, name, enemydamage, enemyHealth, teamNumber, te
         no = true;
     }//Function initateBattle
 }//Function Battlescene End
-// battleScene(2, 'skeleton', 5, 50, 1, 'Heroes', 0 )
+battleScene(2, 'skeleton', 5, 50, 1, 'Heroes', 0 )
 // battleScene(1, 'yo', 2, 50,  1, 'Heroes', 1 )
 
