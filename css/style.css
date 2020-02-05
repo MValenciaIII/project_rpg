@@ -283,7 +283,160 @@ header {
     z-index: 2;
 }
 
+.dungeonFightSceneTransition {
+  font-family: 'Nice Nightie';
+  font-size: 50px;
+  text-align: center;
+  padding: 18%;
+  color: gray;
+  background-color: black;
+  background-size: cover;
+  animation: forwards 5s ending;
+  z-index: 2;
+}
+
 /* Dungeon Scene End */
+
+/* Dungeon Fight */
+.dungeonFight img {
+  position: relative;
+}
+
+.skeletonWalk {
+  position: absolute;
+  bottom: 20%;
+  left: 43%;
+  width: 35px;
+  height: 53px;
+  background-image: url(../media/Skeleton\ Walk.png);
+  animation: walking 1.5s steps(13) forwards;
+  z-index: 2;
+}
+
+@keyframes walking {
+  13%{
+
+  }
+  26% {
+
+  }
+  39% {
+
+  }
+  52% {
+
+  }
+  65% {
+
+  }
+  78% {
+
+  }
+  91% {
+
+  }
+  100% {
+    left: 60%;
+    background-position: -459px 0;
+  }
+}
+.dungeonFight img {
+  position: relative;
+}
+
+.dungeonLevelClear {
+  position: absolute;
+  bottom: 20%;
+  left: 60%;
+  font-family: 'Nice Nightie';
+  font-size: 60px;
+  text-align: center;
+  padding: 18%;
+  background-color: black;
+  background-size: cover;
+  z-index: 3;
+}
+
+.skeletonWalkBack {
+  position: absolute;
+  bottom: 20%;
+  left: 60%;
+  width: 35px;
+  height: 53px;
+  background-image: url(../media/Skeleton\ Walk.png);
+  animation: walkingback 1.5s steps(13) forwards;
+  z-index: 2;
+  transform: rotateY(180deg);
+}
+
+@keyframes walkingback {
+  13%{
+
+  }
+  26% {
+
+  }
+  39% {
+
+  }
+  52% {
+
+  }
+  65% {
+
+  }
+  78% {
+
+  }
+  91% {
+
+  }
+  100% {
+
+    left: 43%;
+    background-position: 459px 0;
+  }
+}
+.skeletonAttack {
+  position: absolute;
+  bottom: 20%;
+  left: 60%;
+  width: 61px;
+  height: 53px;
+  background-image: url(../media/Skeleton\ Attack.png);
+  animation: attacking 1.5s steps(18) forwards;
+  z-index: 2;
+}
+
+@keyframes attacking {
+  13%{
+
+  }
+  26% {
+
+  }
+  39% {
+
+  }
+  52% {
+
+  }
+  65% {
+
+  }
+  78% {
+
+  }
+  91% {
+
+  }
+  100% {
+
+    background-position: -1109px 0;
+  }
+}
+
+/* Dungeon Fight End */
 
 /* Character Chat Style */
 

@@ -20,6 +20,7 @@ function menu() {
     document.querySelector('.dungeonBeginning').style.display = 'none';
     document.querySelector('.dungeon').style.display = 'none';
     document.querySelector('.dungeonSceneTransition').style.display = 'none';
+    document.querySelector('.dungeonFightSceneTransition').style.display = 'none';
     startGame.addEventListener('click', clearMenu);
     instructions.addEventListener('click', instructionMenu);
     backToMenu.addEventListener('click', sendToMenu);
@@ -146,20 +147,16 @@ function village () {
         document.querySelector('.characterAnimation div').className = 'villageWoman';
         wakeUp.disabled = true;
         sleepMore.disabled = true;
-
         setTimeout(() => {
             characters(0, 'You began to hear very heavy and rapid knocking and look over.' ,'gray' , 'Narrator', 'media/transparent.png')
-
             setTimeout(() => {
                 characters(0, 'Please please help me. It\'s an emergency!', 'lightblue', 'lady' , 'media/profileLady.png' )
-
                 document.querySelector('.characterAnimation div').className = 'villageWomanBack';
 
                 setTimeout(() => { 
                     characters(0, 'Do you open the door?', 'gray', 'Narrator' , 'media/transparent.png', 'Open the door', 'Ignore it' )
                     var openDoor = document.querySelectorAll('#optionOne')[1];
-                    var ignoreHer = document.querySelectorAll('#optionTwo')[1];
-                    
+                    var ignoreHer = document.querySelectorAll('#optionTwo')[1];                   
                     openDoor.addEventListener('click',  () => {
                         opening();
 
@@ -417,13 +414,11 @@ function battleScene(enemyNumber, name, enemydamage, enemyHealth, teamNumber, te
         //while attack is true... 
         //do stuff
     let no = true;
+
     function initiateBattle () { 
         let enemynodeList = document.querySelectorAll('.enemyText');
         let textAttackBox = document.querySelectorAll('.action')[fightScene]
         let textAttack;
-        if (enemies[i].health <= 0) {
-            console.log('hello')
-        }
         for (let i = 0; i < enemynodeList.length ; i++) { 
             
             enemynodeList[i].addEventListener('click', function attackingEnemy() {
@@ -443,7 +438,15 @@ function battleScene(enemyNumber, name, enemydamage, enemyHealth, teamNumber, te
                         textAttack = 'Skeleton ' + [enemy] + ' has been defeated.'
                         textAttackBox.innerHTML += textAttack + '<br>'
                         enemynodeList[enemy].removeEventListener('click', attackingEnemy)
-                        enemynodeList[enemy].value = 0
+                        // if (enemies[0].health <= 0 && enemies[1].health <= 0) {
+                        //     var scenario = document.getElementsByClassName('fightSceneContainer')[fightScene].style.display = 'none';
+                        //     let gameover = document.getElementsByClassName('dungeonFightSceneTransition')[0];
+                        //     let gameoverLetters = document.createElement('h1')
+                        //     gameoverLetters.innerHTML = 'Gameover'
+                        //     gameover.appendChild(gameoverLetters)
+                        //     gameoverLetters.className = 'dungeonLevelClear'
+                        //     gameover.display = 'initial'
+                        // }
 
                     }
                     else if (parseInt(enemies[enemy].health) < parseInt(enemies[enemy].maxHealth * .25)) {
@@ -502,6 +505,6 @@ function battleScene(enemyNumber, name, enemydamage, enemyHealth, teamNumber, te
         no = true;
     }//Function initateBattle
 }//Function Battlescene End
-battleScene(2, 'skeleton', 5, 50, 1, 'Heroes', 0 )
+// battleScene(2, 'skeleton', 5, 20, 1, 'Heroes', 0 )
 // battleScene(1, 'yo', 2, 50,  1, 'Heroes', 1 )
 
