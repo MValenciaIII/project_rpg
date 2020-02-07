@@ -41,8 +41,8 @@ header {
     height: max-content;
 }
 
-.menu {
-
+.menu h1{
+    color: gray;
 }
 
 .title h1 { 
@@ -55,10 +55,16 @@ header {
     font-family: 'Dark Tone';
     font-size: 40px;
     text-align: center;
+    
 }
 
 .menuButtons input {
     margin: 15px 0px;
+    border-radius: 10px;
+    font-size: 30px;
+    font-family: 'Eight Bit Dragon';
+    background-color: rgb(105, 105, 105);
+    border: darkgray groove 8px;
 }
 
 .campfire img {
@@ -434,6 +440,21 @@ header {
 
     background-position: -1109px 0;
   }
+}
+
+.skeletonFightIdle {
+    position: absolute;
+    bottom: 20%;
+    left: 43%;
+    width: 39px;
+    height: 53px;
+    background-image: url(../media/SkeletonFightIdle.png);
+    animation: skeletonFightIdle .7s steps(11) infinite;
+    z-index: 3;
+}
+
+@keyframes skeletonFightIdle {
+    100% { background-position: -437px 0};
 }
 
 /* Dungeon Fight End */

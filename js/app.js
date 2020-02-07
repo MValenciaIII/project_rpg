@@ -486,6 +486,7 @@ function battleScene(enemyNumber, name, enemydamage, enemyHealth, teamNumber, te
                                 heroes[0].health -= enemies[enemy].attack
                                 textAttack = 'Enemy '+ [j] + ' hit you with ' + enemies[enemy].attack + ' the amount of damage!';
                                 textAttackBox.innerHTML += textAttack + '<br>';
+                                
 
 
                             } else if (max < 13) {
